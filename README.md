@@ -12,6 +12,18 @@
 基于 ReVanced 实现的B站 Android 客户端增强模块。模块设置完美融入 APP 设置，功能丰富，自定义程度高。
 得益于实现方式，对 APP 性能几乎没有影响，流畅、迅速、启动快。支持粉版、Play 版及 HD 版。
 
+## LSPosed 分支
+
+本 Fork 的 `lsposed` 分支是独立的 Modern LSPosed 运行时 Hook 移植，面向官方哔哩哔哩 8.27.0（8270400），不需要重新打包哔哩哔哩。它以 BiliRoamingX 1.23.3 / r2049 源码和构建产物为功能参考，目前仍是测试版；已移植范围、已知限制和验证记录见 [`xposed/README.md`](xposed/README.md) 与 [`docs/player-port-v5-report.md`](docs/player-port-v5-report.md)。
+
+来源关系：
+
+- 上游项目：[BiliRoamingX/BiliRoamingX](https://github.com/BiliRoamingX/BiliRoamingX)
+- 1.23.3 / r2049 参考：[Colorful-glassblock/BiliRoamingX-Builds](https://github.com/Colorful-glassblock/BiliRoamingX-Builds)
+- 本仓库：[Bobikl/BiliRoamingX](https://github.com/Bobikl/BiliRoamingX)
+
+这是非官方衍生项目，与原 BiliRoamingX 维护者没有隶属或背书关系。原项目的 GPL-3.0 许可和来源信息继续适用。
+
 ## 📖 主要功能
 
 - 解除番剧区域限制
