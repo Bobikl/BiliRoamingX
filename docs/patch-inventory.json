@@ -1,0 +1,1296 @@
+[
+  {
+    "name": "Export all activities",
+    "source": "patches/src/main/kotlin/app/revanced/patches/all/activity/exportall/ExportAllActivitiesPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Predictive back gesture",
+    "source": "patches/src/main/kotlin/app/revanced/patches/all/interaction/gestures/PredictiveBackGesturePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Enable Android debugging",
+    "source": "patches/src/main/kotlin/app/revanced/patches/all/misc/debugging/EnableAndroidDebuggingPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Change package name",
+    "source": "patches/src/main/kotlin/app/revanced/patches/all/misc/packagename/ChangePackageNamePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Spoof SIM country",
+    "source": "patches/src/main/kotlin/app/revanced/patches/all/telephony/sim/spoof/SpoofSimCountryPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "依赖/组合",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Block up recommend ads",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/ads/patch/UpRcmdAdsPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->blockUpRcmdAds"
+    ],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Hide follow button",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/layout/patch/HideFollowButtonPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->shouldShowCommentFollow",
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->shouldShowDynamicFollow"
+    ],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Remove vip section",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/layout/patch/RemoveVipSectionPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/RemoveVipSectionPatch;->onUserCenterFragmentResume",
+      "Lapp/revanced/bilibili/patches/RemoveVipSectionPatch;->onUserCenterFragmentSkinChanged"
+    ],
+    "targets": [
+      "Lcom/bilibili/lib/ui/garb/Garb;",
+      "Ltv/danmaku/bili/ui/main2/mine/HomeUserCenterFragment;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "App icon",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/appicon/AppIconPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource",
+    "category": "C",
+    "dependencies": [
+      "SettingsResourcePatch::class"
+    ]
+  },
+  {
+    "name": "Config",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/config/patch/ConfigPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/ConfigPatch;->getAb",
+      "Lapp/revanced/bilibili/patches/ConfigPatch;->getConfig"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "ABSourceFingerprint",
+      "ConfigSourceFingerprint",
+      "DDContractImplFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": [
+      "IntegrationConfigPatch::class"
+    ]
+  },
+  {
+    "name": "Copy enhance",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/copy/patch/CopyEnhancePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onCommentLongClick",
+      "Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onCommentMenuItemClick",
+      "Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onConversationCopy",
+      "Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onCopyDesc",
+      "Lapp/revanced/bilibili/patches/CopyEnhancePatch;->onDynamicLongClick"
+    ],
+    "targets": [
+      "Lcom/bilibili/bplus/im/business/model/BaseTypedMessage;"
+    ],
+    "fingerprints": [
+      "Comment3CopyFingerprint",
+      "Comment3DialogCopyFingerprint",
+      "CommentCopyNewFingerprint",
+      "CommentCopyOldFingerprint",
+      "ConversationCopyFingerprint",
+      "DescCopyFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Dark switch",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/darkswitch/patch/DarkSwitchPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/DarkSwitchPatch;->switchDarkMode"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "HdNewSwitchDarkModeFingerprint",
+      "MethodFingerprint",
+      "SwitchDarkModeFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Drawer",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/drawer/patch/DrawerPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/drawer/DrawerPatch;->onMainFrameFragmentViewCreated"
+    ],
+    "targets": [
+      "Ltv/danmaku/bili/ui/main2/basic/BaseMainFrameFragment;"
+    ],
+    "fingerprints": [
+      "CloseDrawerControlFingerprint",
+      "DrawerIsOpenFingerprint",
+      "DrawerLayoutParamsFingerprint",
+      "OpenDrawerControlFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Blkv",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/BLKVPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "BLKVFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Brotli",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/BrotliPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "BrotliFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Config integration",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/ConfigPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "BaseMainFrameFragmentFingerprint",
+      "DanmakuFontSwitchPreferenceFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Dpi",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/DpiPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/DpiPatch;->onCronSetDisplayDensity",
+      "Lapp/revanced/bilibili/patches/main/ApplicationDelegate;->getAppResources",
+      "Lapp/revanced/bilibili/patches/main/ApplicationDelegate;->onActivityPreAttachBaseContext",
+      "Lapp/revanced/bilibili/patches/main/ApplicationDelegate;->onActivityPreConfigurationChanged"
+    ],
+    "targets": [
+      "Lcom/bilibili/cron/ViewCoordinator;"
+    ],
+    "fingerprints": [
+      "AppCompatActivityFingerprint"
+    ],
+    "kind": "method/native（需人工确认）",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Integrations",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/IntegrationsPatch.kt",
+    "integrations": [],
+    "targets": [
+      "Lcom/bilibili/app/preferences/custom/DanmakuFontSwitchPreference;",
+      "Lcom/bilibili/gripper/BiliApp;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Lib bili",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/LibBiliPatch.kt",
+    "integrations": [],
+    "targets": [
+      "Lcom/bilibili/nativelibrary/LibBili;"
+    ],
+    "fingerprints": [],
+    "kind": "method/native（需人工确认）",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Main activity patch",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/MainActivityPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/main/MainActivityDelegate;->onBackPressed",
+      "Lapp/revanced/bilibili/patches/main/MainActivityDelegate;->onCreate",
+      "Lapp/revanced/bilibili/patches/main/MainActivityDelegate;->onSaveInstanceState",
+      "Lapp/revanced/bilibili/patches/main/MainActivityDelegate;->onStart"
+    ],
+    "targets": [
+      "Ltv/danmaku/bili/MainActivityV2;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Modify modifier",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/ModifyModifierPatch.kt",
+    "integrations": [],
+    "targets": [
+      "Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\\$Tab;",
+      "Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\\$TabData;",
+      "Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\\$TabResponse;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Anti RecyclerView obfuscation",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/NormalizeRecyclerViewPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "RecyclerViewHolderFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "ProtoBuf print",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/ProtoBufPrintPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Json",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/json/patch/JSONPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/json/JSONPatch;->parseArrayHook",
+      "Lapp/revanced/bilibili/patches/json/JSONPatch;->parseObjectHook"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "JSONFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Pegasus hook",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/json/patch/PegasusPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/json/PegasusPatch;->onFeedClick",
+      "Lapp/revanced/bilibili/patches/json/PegasusPatch;->pegasusHook"
+    ],
+    "targets": [
+      "Lcom/bilibili/app/comm/list/common/data/DislikeReason;",
+      "Lcom/bilibili/okretro/GeneralResponse;",
+      "Lcom/bilibili/pegasus/api/model/BasicIndexItem;"
+    ],
+    "fingerprints": [
+      "CardClickProcessorFingerprint",
+      "CardClickProcessorNewFingerprint",
+      "PegasusParserFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Override certificate pinning",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/network/OverrideCertificatePinningPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Music notification",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/notification/patch/MusicNotificationPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "HeadsetMediaSessionCallbackFingerprint",
+      "LiveNotificationHelperFingerprint",
+      "MediaSessionCallbackApi21Fingerprint",
+      "NotificationStyleAbFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "OkHttp",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/okhttp/patch/OkHttpPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->hook",
+      "Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->hookBefore",
+      "Lapp/revanced/bilibili/patches/okhttp/OkHttpPatch;->shouldHook"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "BodyWrapperFingerprint",
+      "BufferFingerprint",
+      "HeadersFingerprint",
+      "HttpUrlFingerprint",
+      "MediaTypeGetFingerprint",
+      "RealCallFingerprint",
+      "RequestFingerprint",
+      "ResponseBodyFingerprint",
+      "ResponseFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Search type",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/AppendExtraSearchTypePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/okhttp/BangumiSeasonHook;->onSearchResultFragmentVisible"
+    ],
+    "targets": [
+      "Lcom/bilibili/search/result/pages/BiliMainSearchResultPage\\$PageTypes;",
+      "Lcom/bilibili/search2/result/pages/BiliMainSearchResultPage\\$PageTypes;"
+    ],
+    "fingerprints": [
+      "BangumiSearchResultFingerprint",
+      "OgvSearchResultFingerprint",
+      "OgvSearchResultV2Fingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Append signature info for LSPatch",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/AppendSignatureInfoPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Auto like",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/AutoLikePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/AutoLikePatch;->autoLike"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "SectionFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "BL route intercept",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/BLRoutePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/BLRoutePatch;->intercept"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "BLRouteBuilderFingerprint",
+      "RouteRequestFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "BLog",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/BLogPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->debuggable"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "LogcatAdapterFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Bili adjust layout",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/BiliLayoutAdjustPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "SetUnitedTabLayoutFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": [
+      "BiliLayoutAdjustResourcesPatch::class"
+    ]
+  },
+  {
+    "name": "Bili library patch",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/BiliLibraryPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/native（需人工确认）",
+    "category": "C",
+    "dependencies": [
+      "SettingsResourcePatch::class"
+    ]
+  },
+  {
+    "name": "Fix app setting preference layout",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/BiliSettingPreferenceLayoutPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Block thai comment",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/BlockThaiCommentPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/okhttp/BangumiSeasonHook;->onCommentInvalidFragmentViewCreated"
+    ],
+    "targets": [
+      "Lcom/bilibili/bangumi/ui/page/detail/BangumiCommentInvalidFragmentV2;",
+      "Lcom/bilibili/bangumi/ui/page/detail/OGVCommentFragment;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Cache redirect",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/CacheRedirectPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/CacheRedirectPatch;->onMenuClick",
+      "Lapp/revanced/bilibili/patches/CacheRedirectPatch;->onOgvDownload",
+      "Lapp/revanced/bilibili/patches/CacheRedirectPatch;->onTheseusOgvDownload",
+      "Lapp/revanced/bilibili/patches/CacheRedirectPatch;->onUniteDownloadMenuClick"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "OnOgvDownloadFingerprint",
+      "TheseusOnOgvDownloadFingerprint",
+      "UniteDownloadMenuInvokeFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": [
+      "ResourceMappingPatch::class",
+      "SettingsResourcePatch::class"
+    ]
+  },
+  {
+    "name": "Channel model fix",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/ChannelModelFixPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Crash handler",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/CrashHandlerPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/CrashHandlerPatch;->onCrash"
+    ],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Custom splash",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/CustomSplashPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SplashPatch;->getMode",
+      "Lapp/revanced/bilibili/patches/SplashPatch;->onBrandSplashFragmentViewCreated"
+    ],
+    "targets": [
+      "Ltv/danmaku/bili/ui/splash/brand/model/BrandShowInfo;",
+      "Ltv/danmaku/bili/ui/splash/brand/ui/BaseBrandSplashFragment;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Fake not in multi window mode",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/FakeNotInMultiWindowPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->fakeNotInMultiWindow"
+    ],
+    "targets": [
+      "Lcom/bilibili/bangumi/ui/page/detail/BangumiDetailActivityV3;",
+      "Lcom/bilibili/bililive/room/ui/roomv3/LiveRoomActivityV3;",
+      "Lcom/bilibili/multitypeplayerV2/MultiTypeVideoContentActivity;",
+      "Lcom/bilibili/ship/theseus/detail/UnitedBizDetailsActivity;",
+      "Lcom/bilibili/ship/theseus/playlist/UnitedPlaylistActivity;",
+      "Lcom/bilibili/video/videodetail/VideoDetailsActivity;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Forbid auto subscribe",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/FavFolderDialogPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->shouldAutoSubscribe"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "FavFolderOnDataSuccessFingerprint",
+      "FavFolderOnDataSuccessNewFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Forbid live room auto float",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/ForbidLiveRoomAutoFloatPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/LiveRoomPatch;->disableAutoFloat"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "LiveRoomSetFloatWindowFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Forbid live room slide left",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/ForbidLiveRoomSlideLeftPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/LiveRoomPatch;->disableSlideLeft"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "LiveRoomTouchDispatchViewModelFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Forbid switch live room",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/ForbidSwitchLiveRoomPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/LiveRoomPatch;->forbidSwitchLiveRoom"
+    ],
+    "targets": [
+      "Lcom/bilibili/bililive/room/ui/roomv3/vertical/widget/LiveVerticalPagerView;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Force comment time navigable",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/ForceCommentNavigablePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "CommentConfigFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Inject DocumentsProvider",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/InjectDataProviderPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Inject more scheme",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/InjectMoreSchemePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Keep data when uninstall",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/KeepDataWhenUninstallPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Disable live room double click",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/LiveRoomPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/LiveRoomPatch;->disableLiveRoomDoubleClick",
+      "Lapp/revanced/bilibili/patches/LiveRoomPatch;->onDoubleTap"
+    ],
+    "targets": [
+      "Lcom/bilibili/bililive/room/ui/roomv3/player/container/LiveRoomPlayerContainerView;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Make text selectable",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/MakeTextSelectablePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Prevent pre download module",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/ModulePreDownloadHookPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->delayDownloadModules"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "ConfigV3PreloadFingerprint",
+      "WebConfigFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Remove managerSpaceActivity",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/NoManageSpaceActivityPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Notification icon",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/NotificationPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "依赖/组合",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Number format",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/NumberFormatPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "MineBindAccountStateFingerprint",
+      "SpaceBindAccountStateFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Per app language",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/PerAppLanguagePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Play manifest compatibility",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/PlayManifestCompatibilityPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Disable auto select",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/PublishToFollowingPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->shouldAutoSelectOnce"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "PublishToFollowingConfigFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Save comment images",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/SaveCommentImagePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/CommentImagePatch;->bindClickListener",
+      "Lapp/revanced/bilibili/patches/CommentImagePatch;->onCommentImageClick"
+    ],
+    "targets": [
+      "Lcom/bilibili/lib/imageviewer/fragment/ImageFragment;"
+    ],
+    "fingerprints": [
+      "CommentImageSetLayoutBindViewFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Share",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/SharePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->disableAppendTrackingInfo"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "AppendTrackingInfoFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Teenager mode",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/TeenagerModePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->disableTeenagerDialog"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "TeenagersModeFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Text fold",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/TextFoldPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/TextFoldPatch;->getCommentMaxLines",
+      "Lapp/revanced/bilibili/patches/TextFoldPatch;->getDynLinesToAll",
+      "Lapp/revanced/bilibili/patches/TextFoldPatch;->getDynMaxLines"
+    ],
+    "targets": [
+      "Lcom/bilibili/bplus/followingcard/widget/EllipsizingTextView;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Trial quality",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/TrialQualityPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "QualityViewHolderFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Uid copy no prefix",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/UidCopyNoPrefixPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SettingsTransfer;->uidCopyNoPrefix"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "UidCopyFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Upgrade",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/other/patch/UpgradePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "AttachChannelInfoFingerprint",
+      "MainCommonServiceImplFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Comment word search url",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/protobuf/patch/CommentReplyUrlPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/CommentReplyUrlPatch;->filterUrls"
+    ],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Moss",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/protobuf/patch/MossPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/meta/HookFlags;->STOP_EXECUTION",
+      "Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookAsyncBefore",
+      "Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBeforeRequest",
+      "Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBlockingAfter",
+      "Lapp/revanced/bilibili/patches/protobuf/MossPatch;->hookBlockingBefore"
+    ],
+    "targets": [
+      "Lcom/bilibili/lib/moss/api/MossException;",
+      "Lcom/bilibili/lib/moss/api/MossResponseHandler;"
+    ],
+    "fingerprints": [
+      "MossMiddlewareGaiaFingerprint",
+      "MossServiceFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Unlock ProtoBuf",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/protobuf/patch/UnlockProtobufPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Fix preference manager",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/FixPreferenceManagerPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/widget/CheckBoxGroupPreference;->onAttachedToHierarchy"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "PreferenceManagerFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Fix preference click",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/HdPreferenceClickFixPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "HdOnContactClickFingerprint",
+      "HdOnCourseClickFingerprint",
+      "HdOnImClickFingerprint",
+      "HdOnSettingsClickFingerprint",
+      "HdOnWatchLaterClickFingerprint",
+      "MethodFingerprint"
+    ],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Hd preference fragment",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/HdPreferenceFragmentPatch.kt",
+    "integrations": [],
+    "targets": [
+      "Ltv/danmaku/bilibilihd/ui/main/preference/HdPreferenceFragment;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "BiliRoamingX settings entrance",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/SettingsResourcePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource/manifest",
+    "category": "C",
+    "dependencies": [
+      "ResourceMappingPatch::class"
+    ]
+  },
+  {
+    "name": "Splash",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/splash/SplashPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Custom theme color",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/theme/patch/CustomThemePatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "BuiltInThemesFingerprint",
+      "SkinListFingerprint",
+      "ThemeClickFingerprint",
+      "ThemeColorsFingerprint",
+      "ThemeHelperFingerprint",
+      "ThemeNameFingerprint",
+      "ThemeProcessorFingerprint",
+      "WebActivityBuildUriFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": []
+  },
+  {
+    "name": "Toast",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/toast/patch/ToastPatch.kt",
+    "integrations": [],
+    "targets": [
+      "Ltv/danmaku/bili/MainActivityV2;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Webview",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/misc/webview/patch/WebViewPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "依赖/组合",
+    "category": "A",
+    "dependencies": []
+  },
+  {
+    "name": "Add back danmaku system font",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/AddBackDmSystemFontPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [],
+    "kind": "resource",
+    "category": "C",
+    "dependencies": [
+      "IntegrationsPatch::class"
+    ]
+  },
+  {
+    "name": "Enable Key mapping",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/BangumiKeyDownHandlerPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "BangumiKeyDownHandlerFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Default playback speed",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/DefaultPlaybackSpeedPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->defaultSpeed"
+    ],
+    "targets": [
+      "Ltv/danmaku/ijk/media/player/IMediaPlayer;"
+    ],
+    "fingerprints": [
+      "PlaySpeedManagerImplFingerprint",
+      "PlayerOnPreparedFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": [
+      "SettingsResourcePatch::class"
+    ]
+  },
+  {
+    "name": "Force hardware codec",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/HwCodecPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/HwCodecPatch;->enableHwCodec",
+      "Lapp/revanced/bilibili/patches/HwCodecPatch;->printOptionBundle"
+    ],
+    "targets": [
+      "Ltv/danmaku/ijk/media/player/IIjkMediaPlayerItem;",
+      "Ltv/danmaku/ijk/media/player/IjkMediaConfigParams;"
+    ],
+    "fingerprints": [
+      "IjkMediaPlayerOptionsFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Long press playback speed",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/LongPressPlaybackSpeedPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->longPressSpeed"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "TripleSpeedServiceFingerprint",
+      "TripleSpeedServiceUniteFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Override playback speed",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/OverridePlaybackSpeedPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/\") || it.startsWith(\"Lkofua/\") }\n        }.flatMap { c ->\n            c.methods.mapNotNull { m ->\n                val payload = m.implementation?.instructions?.find { inst ->\n                    inst is ArrayPayload && inst.arrayElements.let { it == speedBytesList || it == speedBytesReversedList }\n                } as? DexBackedArrayPayload\n                if (payload != null) {\n                    val (index, inst) = m.implementation?.instructions!!.withIndex().firstNotNullOf { (index, inst) ->\n                        if (inst.opcode == Opcode.FILL_ARRAY_DATA && inst is DexBackedInstruction31t\n                            && inst.let { it.instructionStart + it.codeOffset * 2 } == payload.instructionStart\n                        ) index to inst else null\n                    }\n                    val clazz = c.proxy(context)\n                    val method = clazz.methods.first { it == m }\n                    Info(clazz, method, index, inst.registerA)\n                } else null\n            }\n        }.ifEmpty {\n            throw PatchException(\"Retrieve speed array info failed\")\n        }.forEach { (clazz, method, index, register) ->\n            val instructions = method.implementation!!.instructions\n            val payloadInst = instructions.first { inst ->\n                inst is ArrayPayload && inst.arrayElements.let { it == speedBytesList || it == speedBytesReversedList }\n            } as ArrayPayload\n            val reverse = payloadInst.arrayElements == speedBytesReversedList\n            val patchMethodName = if (reverse) \"getOverrideReverseSpeedArray\" else \"getOverrideSpeedArray\"\n            method.addInstructions(\n                index + 1, \"\"\"\n                invoke-static {v$register}, Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->$patchMethodName",
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->getOverrideSpeedArraySize",
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->onNewPlaybackSpeedSetting",
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->onPlaybackSpeedSelected",
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->onUnitePlayerSetSpeedMenu"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "PlaybackSpeedSettingFingerprint",
+      "PlayerSpeedWidgetFingerprint",
+      "UnitePlayerSetSpeedMenuFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Play url",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/PlayUrlPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/PlayUrlPatch;->onBuildMediaAssetSegment"
+    ],
+    "targets": [
+      "Ltv/danmaku/ijk/media/player/IjkMediaAsset\\$MediaAssertSegment;",
+      "Ltv/danmaku/ijk/media/player/IjkMediaAsset\\$MediaAssertSegment\\$Builder;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Player gesture detector hook",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/PlayerGestureDetectorPatch.kt",
+    "integrations": [],
+    "targets": [
+      "Ltv/danmaku/videoplayer/core/videoview/AspectRatio;"
+    ],
+    "fingerprints": [
+      "PlayerGestureListenerFingerprint",
+      "PlayerGestureRotateFingerprint",
+      "PlayerResizableGestureListenerFingerprint",
+      "ResetResizeFunctionWidgetFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": [
+      "PlayerToastPatch::class"
+    ]
+  },
+  {
+    "name": "Player core",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/PlayerPatch.kt",
+    "integrations": [],
+    "targets": [],
+    "fingerprints": [
+      "PlayerSeekToFingerprint",
+      "RemoteServiceHandlerOnStartFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Player toast",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/PlayerToastPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/PlayerToastPatch;->onShow"
+    ],
+    "targets": [
+      "Ltv/danmaku/biliplayerv2/widget/toast/PlayerToast;"
+    ],
+    "fingerprints": [
+      "ShowPlayerToastFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Remember playback speed",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/player/patch/RememberPlaybackSpeedPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/PlaybackSpeedPatch;->onPlaybackSpeedSelected"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "MenuFuncSegmentFingerprint",
+      "MenuServiceCreateSpeedFingerprint",
+      "PlaybackSpeedSettingFingerprint",
+      "PlayerSettingCreateSpeedFingerprint",
+      "PlayerSpeedChooseWidgetFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": [
+      "SettingsResourcePatch::class"
+    ]
+  },
+  {
+    "name": "Video default quality",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/quality/patch/VideoQualityPatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/VideoQualityPatch;->getMatchedFullScreenQuality"
+    ],
+    "targets": [],
+    "fingerprints": [
+      "PlayerSettingHelperFingerprint"
+    ],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  },
+  {
+    "name": "Subtitle import and save",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/subtitle/patch/SubtitleImportSavePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SubtitleImportSavePatch;->onCreateSubtitleWidget"
+    ],
+    "targets": [
+      "Ltv/danmaku/biliplayerv2/injection/InjectPlayerService;"
+    ],
+    "fingerprints": [
+      "FunctionWidgetServiceFingerprint",
+      "FunctionWidgetTokenFingerprint",
+      "PlayerSubtitleFunctionWidgetFingerprint",
+      "RecordSelectedSubtitleFingerprint",
+      "SetDmViewReplyFingerprint"
+    ],
+    "kind": "method",
+    "category": "C",
+    "dependencies": [
+      "SubtitleImportSaveButtonPatch::class"
+    ]
+  },
+  {
+    "name": "Subtitle style",
+    "source": "patches/src/main/kotlin/app/revanced/patches/bilibili/video/subtitle/patch/SubtitlePatch.kt",
+    "integrations": [
+      "Lapp/revanced/bilibili/patches/SubtitlePatch;->drawPath",
+      "Lapp/revanced/bilibili/patches/SubtitlePatch;->drawText",
+      "Lapp/revanced/bilibili/patches/SubtitlePatch;->measureTextImpl",
+      "Lapp/revanced/bilibili/patches/SubtitlePatch;->offset",
+      "Lapp/revanced/bilibili/patches/SubtitlePatch;->setPaint"
+    ],
+    "targets": [
+      "Lcom/bilibili/cron/Canvas;",
+      "Ltv/danmaku/biliplayerv2/service/interact/biz/chronos/chronosrpc/methods/receive/GetDanmakuConfig\\$SubtitleConfig;",
+      "Ltv/danmaku/biliplayerv2/service/interact/biz/chronos/chronosrpc/methods/send/DanmakuConfigChange\\$SubtitleConfig;"
+    ],
+    "fingerprints": [],
+    "kind": "method",
+    "category": "B",
+    "dependencies": []
+  }
+]
