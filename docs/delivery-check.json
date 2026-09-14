@@ -1,0 +1,26 @@
+[
+  {
+    "file": "X:\\临时同步\\BiliRoamingX-LSPosed-first-round\\BiliRoamingX-LSPosed-1.23.3-bili8.27.0-test.apk",
+    "bytes": 49344,
+    "sha256": "01824bc6d49d09893322467277a1a872e25b0695add87c5a38493e701993cdd6",
+    "source_copy_match": true
+  },
+  {
+    "file": "X:\\临时同步\\BiliRoamingX-LSPosed-first-round\\final-revanced\\BiliRoamingX-integrations-1.23.3.apk",
+    "bytes": 476533,
+    "sha256": "f818396a0ff064db02c4fe8b38da4d75881bc37546c06ca65a8fe568aa8ba581",
+    "source_copy_match": true
+  },
+  {
+    "file": "X:\\临时同步\\BiliRoamingX-LSPosed-first-round\\baseline-rebuilt\\BiliRoamingX-integrations-1.23.3.apk",
+    "bytes": 476533,
+    "sha256": "3eeb86a7bd10c2691dad0facf06e9fcb965e092536c421f346344130861f73d5",
+    "source_copy_match": true
+  },
+  {
+    "file": "X:\\临时同步\\BiliRoamingX-LSPosed-first-round\\blacklist-removed\\BiliRoamingX-integrations-1.23.3.apk",
+    "bytes": 476533,
+    "sha256": "c2a78c853ea3352f1582f71d33cc1c0e5edfb1152ef64a790f5cbcea608639ca",
+    "source_copy_match": true
+  }
+]
