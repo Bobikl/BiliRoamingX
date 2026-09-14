@@ -33,6 +33,7 @@ final class SettingsScreen {
     private final Activity activity;
     private final Context context;
     private final SettingsStore module;
+    private final PlayerSubtitles subtitles;
     private final Consumer<View> mount;
     private final Runnable close;
     private final Runnable observer = this::render;
@@ -45,8 +46,9 @@ final class SettingsScreen {
     private int foreground, muted, background, surface, divider;
     private final int pink = 0xfffb7299;
 
-    SettingsScreen(Activity activity, Context context, SettingsStore module, Consumer<View> mount, Runnable close) {
+    SettingsScreen(Activity activity, Context context, SettingsStore module, PlayerSubtitles subtitles, Consumer<View> mount, Runnable close) {
         this.activity = activity; this.context = context; this.module = module; this.mount = mount; this.close = close;
+        this.subtitles = subtitles;
         JSONArray schema = module.schema();
         for (int i = 0; i < schema.length(); i++) {
             JSONObject def = schema.optJSONObject(i);
@@ -110,6 +112,12 @@ final class SettingsScreen {
             JSONObject row = rows.optJSONObject(i); if (row == null) continue;
             String kind = row.optString("kind"), key = row.optString("key");
             String label = row.optString("title", definitions.containsKey(key) ? definitions.get(key).optString("title") : "");
+            if (key.equals("subtitle_font_import") || key.equals("subtitle_font_reset")) {
+                boolean imported = subtitles.fontFile().isFile();
+                addRow(label, row.optString("summary"), imported ? "已导入" : "默认", () -> {
+                    if (key.equals("subtitle_font_import")) subtitles.importFont(activity, this::render); else subtitles.resetFont(this::render);
+                }, null); continue;
+            }
             if ("version".equals(key)) {
                 addRow(label, BuildConfig.VERSION_NAME + "\n" + module.connectionStatus(), "", null, null); continue;
             }
@@ -127,6 +135,12 @@ final class SettingsScreen {
                 addRow(label, row.optString("summary"), "", () -> save(e -> e.putBoolean(key, !checked)), checked);
             } else if (definition != null && definition.optBoolean("ported") && row.has("entries")) {
                 options(row, definition, label);
+            } else if (definition != null && definition.optBoolean("ported")) {
+                Object value = module.preferences().getAll().get(key);
+                if (value == null) value = definition.opt("default");
+                String status = key.equals("access_key_main") ? (value == null || value.toString().isEmpty() ? "未设置" : "已设置") : String.valueOf(value);
+                if (status.length() > 18) status = "已设置";
+                addRow(label, row.optString("summary"), status, () -> edit(definition, label), null);
             } else {
                 addRow(label.isEmpty() ? (key.isEmpty() ? "设置" : key) : label, row.optString("summary"), "未移植", null, null);
             }
@@ -176,6 +190,40 @@ final class SettingsScreen {
     }
     private static boolean contains(JSONArray values, String value) {
         for (int i = 0; i < values.length(); i++) if (value.equals(values.optString(i))) return true; return false;
+    }
+    private void edit(JSONObject definition, String title) {
+        String key = definition.optString("key"), type = definition.optString("type");
+        android.widget.EditText input = new android.widget.EditText(context); input.setSingleLine(true);
+        input.setTextColor(foreground); input.setBackgroundTintList(ColorStateList.valueOf(pink)); input.setHint("留空恢复默认");
+        Object value = module.preferences().getAll().get(key); input.setText(value == null ? "" : value.toString());
+        if (type.equals("Float") || type.equals("Int")) input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER
+                | (type.equals("Float") ? android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL : 0)
+                | (key.equals("subtitle_offset") ? android.text.InputType.TYPE_NUMBER_FLAG_SIGNED : 0));
+        else if (key.equals("access_key_main")) {
+            input.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            input.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS);
+        } else input.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        if (key.equals("playback_speed_override")) input.setHint("空格分隔，如 2 1.5 1 0.75；必须包含 1");
+        LinearLayout wrapper = new LinearLayout(context); wrapper.setPadding(dp(24), dp(8), dp(24), 0);
+        wrapper.addView(input, new LinearLayout.LayoutParams(-1, -2));
+        android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(context).setTitle(title).setView(wrapper)
+                .setNegativeButton("取消", null).setPositiveButton("保存", null).create();
+        dialog.setOnShowListener(ignored -> {
+            dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(pink);
+            dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
+                try {
+                    Object parsed = PlayerSettingsInput.parse(key, type, input.getText().toString());
+                    save(editor -> {
+                        if (parsed == null) editor.remove(key);
+                        else if (parsed instanceof Float number) editor.putFloat(key, number);
+                        else if (parsed instanceof Integer number) editor.putInt(key, number);
+                        else editor.putString(key, (String) parsed);
+                    });
+                    dialog.dismiss();
+                } catch (IllegalArgumentException error) { input.setError(error instanceof NumberFormatException ? "请输入有效数字" : error.getMessage()); }
+            });
+        });
+        dialog.show(); input.requestFocus();
     }
     private void section(String title) {
         TextView view = label(title, 13, muted); view.setPadding(dp(16), dp(16), dp(16), dp(9));

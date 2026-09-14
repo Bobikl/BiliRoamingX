@@ -69,6 +69,16 @@ public final class ModuleEntry extends XposedModule {
         runtime.registerLifecycle();
         new BottomBarHook(this, runtime).install();
         new SettingsEntranceHook(this, runtime).install();
+        new PlayerConfigHook(this, runtime).install();
+        new PlayerMediaHook(this, runtime).install();
+        new PlayerSpeedHook(this, runtime).install();
+        new PlayerSpeedListHook(this, runtime).install();
+        new PlayerGestureHook(this, runtime).install();
+        new PlayerMossHook(this, runtime).install();
+        new PlayerNetworkHook(this, runtime).install();
+        new PlayerTrialHook(this, runtime).install();
+        new PlayerSubtitleHook(this, runtime).install();
+        runtime.subtitles.install();
     }
 
     void failure(String hook, String target, String method, Throwable error) {

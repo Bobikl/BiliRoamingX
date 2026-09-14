@@ -17,6 +17,7 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
     final Context hostContext;
     final ClassLoader hostLoader;
     final SharedPreferences preferences;
+    final PlayerSubtitles subtitles;
     private final LocalSettingsStore settings;
     private final Application hostApplication;
     private final ModuleEntry entry;
@@ -31,7 +32,7 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
                 : android.R.style.Theme_Material_Light_NoActionBar);
         dialog.setOwnerActivity(activity);
         dialog.setTitle("哔哩漫游X");
-        SettingsScreen screen = new SettingsScreen(activity, dialog.getContext(), settings, dialog::setContentView, dialog::dismiss);
+        SettingsScreen screen = new SettingsScreen(activity, dialog.getContext(), settings, subtitles, dialog::setContentView, dialog::dismiss);
         settingsDialog = dialog;
         dialog.setOnKeyListener((ignored, key, event) -> key == android.view.KeyEvent.KEYCODE_BACK
                 && event.getAction() == android.view.KeyEvent.ACTION_UP && screen.back());
@@ -78,6 +79,7 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
         this.settings = new LocalSettingsStore(hostApplication, entry);
         this.preferences = settings.preferences();
         this.entry = entry;
+        this.subtitles = new PlayerSubtitles(entry, this);
     }
 
     void registerLifecycle() {
@@ -103,6 +105,7 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
         if (topActivity.get() == activity) topActivity = new WeakReference<>(null);
     }
     @Override public void onActivityDestroyed(Activity activity) {
+        subtitles.forget(activity);
         if (settingsDialog != null && settingsDialog.getOwnerActivity() == activity) settingsDialog.dismiss();
         if (topActivity.get() == activity) topActivity = new WeakReference<>(null);
     }
