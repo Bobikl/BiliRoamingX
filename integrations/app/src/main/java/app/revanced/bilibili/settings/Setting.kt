@@ -2,7 +2,6 @@ package app.revanced.bilibili.settings
 
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
-import app.revanced.bilibili.account.Accounts
 import app.revanced.bilibili.utils.*
 
 @Suppress("LeakingThis", "NOTHING_TO_INLINE")
@@ -44,7 +43,7 @@ sealed class Setting<out T : Any>(
     }
 
     fun get(): T {
-        return if (Accounts.userBlocked || (dependency != null && !dependency.get())) defValue else value
+        return if (dependency != null && !dependency.get()) defValue else value
     }
 
     fun executeOnChangeAction(async: Boolean) {
