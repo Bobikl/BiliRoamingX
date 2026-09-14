@@ -1,0 +1,13 @@
+{
+  "apk": "BiliRoamingX-LSPosed-release.apk",
+  "bytes": 56804,
+  "sha256": "e0732b82bfccbf6b5b05360e9b3bc34086fd3814175e2eb84279fc17545f6f29",
+  "checks": "passed",
+  "entry": "app.revanced.bilibili.xposed.ModuleEntry",
+  "api": 102,
+  "scope": "tv.danmaku.bili",
+  "defined_class_count": 57,
+  "settings_count": 204,
+  "forbidden_marker_hits": [],
+  "device_testing": "not performed; user handles phone validation"
+}

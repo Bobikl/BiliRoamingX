@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.HashSet;
 
-/** One-way, UID-checked navigation discovery. Configuration uses Remote Preferences. */
+/** UID-checked discovery and in-host settings bridge; only the module writes Remote Preferences. */
 public final class CatalogProvider extends ContentProvider {
     static final String LOCAL_GROUP = "host_catalog";
 
@@ -28,7 +28,18 @@ public final class CatalogProvider extends ContentProvider {
         int caller = Binder.getCallingUid();
         String[] packages = moduleContext.getPackageManager().getPackagesForUid(caller);
         if (caller != Process.myUid() && (packages == null || !Arrays.asList(packages).contains(ModuleConstants.HOST))) {
-            throw new SecurityException("Only scoped Bilibili UID may publish navigation metadata");
+            throw new SecurityException("Only scoped Bilibili UID may access module bridge");
+        }
+        ModuleApplication module = (ModuleApplication) moduleContext.getApplicationContext();
+        if (caller != Process.myUid() && ("settings_snapshot".equals(method) || "settings_save".equals(method))) {
+            verifyHostSignature(moduleContext);
+        }
+        if ("settings_snapshot".equals(method)) return SettingsBridge.snapshot(module);
+        if ("settings_save".equals(method)) {
+            module.saveFromHost(SettingsBridge.validate(module.schema(), extras));
+            Bundle result = SettingsBridge.snapshot(module);
+            result.putBoolean("saved", true);
+            return result;
         }
         if (!"report".equals(method) || extras == null) throw new IllegalArgumentException("Unsupported call");
         String state = extras.getString("state", "");
@@ -63,6 +74,23 @@ public final class CatalogProvider extends ContentProvider {
         Bundle result = new Bundle();
         result.putBoolean("accepted", true);
         return result;
+    }
+
+    private static void verifyHostSignature(Context context) {
+        try {
+            boolean modern = android.os.Build.VERSION.SDK_INT >= 28;
+            var info = context.getPackageManager().getPackageInfo(ModuleConstants.HOST, modern
+                    ? android.content.pm.PackageManager.GET_SIGNING_CERTIFICATES
+                    : android.content.pm.PackageManager.GET_SIGNATURES);
+            var signatures = modern ? info.signingInfo.getApkContentsSigners() : info.signatures;
+            if (signatures == null || signatures.length != 1) throw new SecurityException("Unexpected host signer count");
+            byte[] digest = java.security.MessageDigest.getInstance("SHA-256").digest(signatures[0].toByteArray());
+            StringBuilder hex = new StringBuilder();
+            for (byte part : digest) hex.append(String.format(java.util.Locale.ROOT, "%02x", part & 0xff));
+            if (!ModuleConstants.HOST_CERT_SHA256.contentEquals(hex)) throw new SecurityException("Official host signature required");
+        } catch (Exception error) {
+            throw new SecurityException("Host settings caller verification failed", error);
+        }
     }
 
     @Override public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String order) {

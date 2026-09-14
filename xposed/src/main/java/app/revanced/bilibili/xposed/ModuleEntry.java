@@ -69,6 +69,7 @@ public final class ModuleEntry extends XposedModule {
         HostRuntime runtime = new HostRuntime(hostApplication, hostLoader, preferences, this);
         runtime.registerLifecycle();
         new BottomBarHook(this, runtime).install();
+        new SettingsEntranceHook(this, runtime).install();
     }
 
     void failure(String hook, String target, String method, Throwable error) {

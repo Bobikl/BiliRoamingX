@@ -9,8 +9,8 @@ android {
         applicationId = "app.revanced.bilibili.xposed"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.23.3-lsposed.1"
+        versionCode = 2
+        versionName = "1.23.3-lsposed.2"
     }
     buildFeatures { buildConfig = true }
     compileOptions {
@@ -41,6 +41,7 @@ val policyChecks by configurations.creating
 dependencies { policyChecks("junit:junit:4.13.2") }
 val compilePolicyChecks by tasks.registering(JavaCompile::class) {
     source("../integrations/runtime/src/main/java", "src/test/java")
+    source("src/main/java/app/revanced/bilibili/xposed/SettingsMutation.java")
     classpath = policyChecks
     destinationDirectory.set(layout.buildDirectory.dir("policy-checks/classes"))
     sourceCompatibility = "17"
@@ -53,4 +54,11 @@ tasks.register<JavaExec>("verifyBottomBarPolicy") {
     classpath = files(compilePolicyChecks.flatMap { it.destinationDirectory }) + policyChecks
     mainClass.set("org.junit.runner.JUnitCore")
     args("app.revanced.bilibili.runtime.BottomBarPolicyTest")
+}
+tasks.register<JavaExec>("verifySettingsBridge") {
+    group = "verification"
+    dependsOn(compilePolicyChecks)
+    classpath = files(compilePolicyChecks.flatMap { it.destinationDirectory }) + policyChecks
+    mainClass.set("org.junit.runner.JUnitCore")
+    args("app.revanced.bilibili.xposed.SettingsMutationTest")
 }

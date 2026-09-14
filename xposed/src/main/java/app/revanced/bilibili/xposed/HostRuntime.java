@@ -2,6 +2,9 @@ package app.revanced.bilibili.xposed;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Dialog;
+import android.content.res.Configuration;
+import android.view.ViewGroup;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -26,6 +29,51 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
         return thread;
     });
     private volatile String lastReport = "";
+    private Dialog settingsDialog;
+
+    void openSettings(Activity activity) {
+        if (settingsDialog != null && settingsDialog.isShowing()) return;
+        boolean dark = (activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                == Configuration.UI_MODE_NIGHT_YES;
+        Dialog dialog = new Dialog(activity, dark ? android.R.style.Theme_Material_NoActionBar
+                : android.R.style.Theme_Material_Light_NoActionBar);
+        dialog.setOwnerActivity(activity);
+        dialog.setTitle("哔哩漫游X");
+        HostSettingsStore store = new HostSettingsStore(hostContext, entry);
+        SettingsScreen screen = new SettingsScreen(activity, dialog.getContext(), store, dialog::setContentView, dialog::dismiss);
+        settingsDialog = dialog;
+        dialog.setOnDismissListener(ignored -> {
+            screen.pause();
+            store.close();
+            if (settingsDialog == dialog) settingsDialog = null;
+        });
+        try {
+            dialog.show();
+            if (dialog.getWindow() != null) {
+                var window = dialog.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                if (android.os.Build.VERSION.SDK_INT >= 30) window.setDecorFitsSystemWindows(false);
+                else window.getDecorView().setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | (dark ? 0 : android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR));
+                window.setStatusBarColor(android.graphics.Color.TRANSPARENT);
+                window.setNavigationBarColor(android.graphics.Color.TRANSPARENT);
+                if (android.os.Build.VERSION.SDK_INT >= 30 && window.getInsetsController() != null) {
+                    int flags = android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                            | android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS;
+                    window.getInsetsController().setSystemBarsAppearance(dark ? 0 : flags, flags);
+                }
+            }
+            screen.resume();
+            entry.log(Log.INFO, ModuleConstants.TAG, "Settings.open: host-owned settings page shown");
+        } catch (RuntimeException error) {
+            dialog.dismiss();
+            screen.pause();
+            store.close();
+            settingsDialog = null;
+            throw error;
+        }
+    }
 
     HostRuntime(Application hostApplication, ClassLoader hostLoader, SharedPreferences preferences, ModuleEntry entry) {
         this.hostApplication = hostApplication;
@@ -70,6 +118,7 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
         if (topActivity.get() == activity) topActivity = new WeakReference<>(null);
     }
     @Override public void onActivityDestroyed(Activity activity) {
+        if (settingsDialog != null && settingsDialog.getOwnerActivity() == activity) settingsDialog.dismiss();
         if (topActivity.get() == activity) topActivity = new WeakReference<>(null);
     }
     @Override public void onActivityCreated(Activity activity, Bundle state) {}

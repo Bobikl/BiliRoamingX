@@ -1,0 +1,34 @@
+{
+  "host_sha256": "00ad96b15626026c9880f08c2ff3c5a8059c08eb1683928bb0e6ed2d0b37cd7c",
+  "checks": "passed",
+  "public_dex_methods": {
+    "com.bilibili.app.preferences.BiliPreferencesActivity$BiliPreferencesFragment": [
+      "onCreatePreferences(Landroid/os/Bundle;Ljava/lang/String;)V"
+    ],
+    "androidx.preference.Preference": [
+      "<init>(Landroid/content/Context;)V",
+      "setKey(Ljava/lang/String;)V",
+      "setTitle(Ljava/lang/CharSequence;)V",
+      "setSummary(Ljava/lang/CharSequence;)V",
+      "setOrder(I)V",
+      "setPersistent(Z)V",
+      "setIconSpaceReserved(Z)V",
+      "setOnPreferenceClickListener(Landroidx/preference/Preference$d;)V"
+    ],
+    "androidx.preference.Preference$d": [
+      "(Landroidx/preference/Preference;)Z"
+    ],
+    "androidx.preference.PreferenceGroup": [
+      "findPreference(Ljava/lang/CharSequence;)Landroidx/preference/Preference;",
+      "addPreference(Landroidx/preference/Preference;)Z"
+    ],
+    "androidx.preference.PreferenceFragmentCompat": [
+      "getPreferenceScreen()Landroidx/preference/PreferenceScreen;"
+    ],
+    "androidx.fragment.app.Fragment": [
+      "getActivity()Landroidx/fragment/app/FragmentActivity;",
+      "getContext()Landroid/content/Context;"
+    ]
+  },
+  "device_execution": false
+}

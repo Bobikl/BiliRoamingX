@@ -1,4 +1,6 @@
-# 哔哩漫游X：首轮 LSPosed 移植
+# 哔哩漫游X：LSPosed 移植
+
+当前版本 `1.23.3-lsposed.2`：新增“哔哩哔哩 → 设置 → 哔哩漫游X”内嵌页，宿主全屏 Dialog 显示，与独立入口共用配置。上一版底栏隐藏已由用户真机确认；新版内嵌入口、窗口和保存桥接仍待手机验证。见 [内嵌设置与日志报告](../docs/embedded-settings-report.md)。
 
 基于 BiliRoamingX 1.23.3 / GPL-3.0。第一轮只实现 Json Patch 的底部导航过滤，不是全部 91 个 Patch 的完整移植。
 
@@ -6,9 +8,9 @@
 
 ## 手机验证步骤（由用户执行）
 
-1. 安装交付目录顶层的 `BiliRoamingX-LSPosed-1.23.3-bili8.27.0-test.apk`。
+1. 覆盖安装交付目录顶层的 `BiliRoamingX-LSPosed-1.23.3-bili8.27.0-embedded-v2-test.apk`。
 2. 在 LSPosed 启用模块，作用域勾选粉版哔哩哔哩。
-3. 打开独立模块设置，确认“已连接 LSPosed”。
+3. 重启哔哩哔哩后，从哔哩哔哩设置进入“哔哩漫游X”，确认设置可读取和保存；独立模块设置入口仍可使用。
 4. 彻底关闭并重新打开哔哩哔哩，进入首页，再返回模块设置读取实际底栏列表。
 5. 取消一个底栏按钮的勾选并保存，再彻底关闭并重新打开哔哩哔哩，检查按钮是否隐藏。
 6. 返回模块设置，核对“宿主最近读取”的配置版本和按钮数量；重启后再次确认设置保留。
@@ -16,15 +18,15 @@
 
 若列表没有出现，查看 LSPosed 日志中的 `BiliRoamingX-LSPosed`：入口加载、3/3 解析 Hook、兼容性错误和目录回传错误会分别记录。设置界面的历史回传记录只代表记录时刻，不代表当前进程仍在运行。
 
-全部 204 项原 Settings 可按原类型保存；未移植项明确显示“仅保存”，不运行原 onChange 操作，不宣称已经生效。当前模块不读取账号、UID、cookie 或 accessKey；相关账户功能尚未移植。
+全部 204 项原 Settings 可按原类型保存；未移植项明确显示“仅保存”，不运行原 onChange 操作，不宣称已经生效。当前模块不从宿主读取账号资料、UID、cookie 或 accessKey；用户手动输入的配置仍会在两种设置入口间同步，相关账户功能尚未移植。
 
 ## 构建
 
 独立工程使用 JDK 17、Gradle 9.4.1、AGP 9.2.1、SDK 37，避免升级原 ReVanced 工程的工具链。在本目录执行：
 
 ```powershell
-.\gradlew.bat assembleRelease verifyBottomBarPolicy lintRelease
-python tools/check_artifact.py build/outputs/apk/release/BiliRoamingX-LSPosed-release.apk --report ../docs/module-artifact-check.json
+.\gradlew.bat assembleRelease verifyBottomBarPolicy verifySettingsBridge lintRelease
+python tools/check_artifact.py build/outputs/apk/release/BiliRoamingX-LSPosed-release.apk --report ../docs/module-artifact-check-v2.json
 ```
 
 运行 `python tools/generate_settings_schema.py` 可从原 Settings.kt 重新生成 204 项配置目录，生成器遇到无法解析的声明或默认值会失败。
