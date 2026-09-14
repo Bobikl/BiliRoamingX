@@ -1,0 +1,2 @@
+-keep class app.revanced.bilibili.xposed.ModuleEntry { *; }
+-keepattributes Signature,InnerClasses,EnclosingMethod

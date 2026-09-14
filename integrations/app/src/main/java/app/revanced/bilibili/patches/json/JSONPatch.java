@@ -1,5 +1,7 @@
 package app.revanced.bilibili.patches.json;
 
+import app.revanced.bilibili.runtime.BottomBarPolicy;
+
 import android.text.TextUtils;
 
 import androidx.annotation.Keep;
@@ -241,8 +243,7 @@ public class JSONPatch {
     }
 
     public static boolean shouldShowing(Set<? extends String> items, String item) {
-        if (items.contains(item)) return true;
-        return items.size() == 1 && items.contains(Constants.ALL_VALUE);
+        return BottomBarPolicy.shouldShowing(items, item);
     }
 
     private static void customizeMine(AccountMine mine) {

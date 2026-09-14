@@ -11,6 +11,7 @@ plugins {
 
 setupAppModule {
     namespace = "app.revanced.bilibili.integrations"
+    sourceSets.getByName("main").java.srcDir("../runtime/src/main/java")
 
     defaultConfig {
         applicationId = "app.revanced.bilibili.integrations"
