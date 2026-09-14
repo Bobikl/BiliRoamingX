@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "app.revanced.bilibili.xposed"
-    compileSdk { version = release(37) }
+    compileSdk { version = release(35) }
     defaultConfig {
         applicationId = "app.revanced.bilibili.xposed"
         minSdk = 26
