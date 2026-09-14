@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import org.json.JSONArray;
 import java.util.function.Consumer;
 
-/** One UI, with storage provided by either the module or its UID-checked bridge. */
+/** Host-only settings and diagnostics; there is no independent module UI. */
 interface SettingsStore {
     SharedPreferences preferences();
     SharedPreferences catalog();

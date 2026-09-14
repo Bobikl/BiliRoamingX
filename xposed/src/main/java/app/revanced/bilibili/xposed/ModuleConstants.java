@@ -8,7 +8,10 @@ final class ModuleConstants {
     static final String GROUP = "settings";
     static final String BOTTOM_KEY = "showing_bottom_items";
     static final String REVISION = "_lsposed_config_revision";
-    static final String CATALOG_AUTHORITY = "app.revanced.bilibili.xposed.catalog";
+    static final String LOCAL_SETTINGS = "biliroamingx_lsposed_settings";
+    static final String LOCAL_CATALOG = "biliroamingx_lsposed_catalog";
+    static final String MIGRATED = "_lsposed_remote_migrated_v1";
+    static final String EDITED_KEYS = "_lsposed_local_edited_keys";
     static final String TAG = "BiliRoamingX-LSPosed";
 
     private ModuleConstants() {}

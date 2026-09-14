@@ -7,28 +7,20 @@ import android.content.res.Configuration;
 import android.view.ViewGroup;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-/** Host-only runtime. Module UI resources and private files never use this Context. */
+/** Host-only runtime. All configuration and UI now belong to the scoped host process. */
 final class HostRuntime implements Application.ActivityLifecycleCallbacks {
     final Context hostContext;
     final ClassLoader hostLoader;
     final SharedPreferences preferences;
+    private final LocalSettingsStore settings;
     private final Application hostApplication;
     private final ModuleEntry entry;
     private volatile WeakReference<Activity> topActivity = new WeakReference<>(null);
-    private final ExecutorService reports = Executors.newSingleThreadExecutor(runnable -> {
-        Thread thread = new Thread(runnable, "BiliRoamingX-catalog");
-        thread.setDaemon(true);
-        return thread;
-    });
-    private volatile String lastReport = "";
     private Dialog settingsDialog;
 
     void openSettings(Activity activity) {
@@ -39,12 +31,10 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
                 : android.R.style.Theme_Material_Light_NoActionBar);
         dialog.setOwnerActivity(activity);
         dialog.setTitle("哔哩漫游X");
-        HostSettingsStore store = new HostSettingsStore(hostContext, entry);
-        SettingsScreen screen = new SettingsScreen(activity, dialog.getContext(), store, dialog::setContentView, dialog::dismiss);
+        SettingsScreen screen = new SettingsScreen(activity, dialog.getContext(), settings, dialog::setContentView, dialog::dismiss);
         settingsDialog = dialog;
         dialog.setOnDismissListener(ignored -> {
             screen.pause();
-            store.close();
             if (settingsDialog == dialog) settingsDialog = null;
         });
         try {
@@ -69,17 +59,17 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
         } catch (RuntimeException error) {
             dialog.dismiss();
             screen.pause();
-            store.close();
             settingsDialog = null;
             throw error;
         }
     }
 
-    HostRuntime(Application hostApplication, ClassLoader hostLoader, SharedPreferences preferences, ModuleEntry entry) {
+    HostRuntime(Application hostApplication, ClassLoader hostLoader, ModuleEntry entry) {
         this.hostApplication = hostApplication;
         this.hostContext = hostApplication;
         this.hostLoader = hostLoader;
-        this.preferences = preferences;
+        this.settings = new LocalSettingsStore(hostApplication, entry);
+        this.preferences = settings.preferences();
         this.entry = entry;
     }
 
@@ -92,21 +82,7 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
     }
 
     void report(Bundle data, String identity) {
-        // Reports contain only navigation labels/IDs, configuration revision and counts.
-        if (identity.equals(lastReport)) return;
-        reports.execute(() -> {
-            if (identity.equals(lastReport)) return;
-            try {
-                Bundle response = hostContext.getContentResolver().call(
-                        Uri.parse("content://" + ModuleConstants.CATALOG_AUTHORITY), "report", null, data);
-                if (response == null || !response.getBoolean("accepted")) {
-                    throw new IllegalStateException("Module catalog provider did not accept report");
-                }
-                lastReport = identity;
-            } catch (Throwable error) {
-                entry.failure("BottomBar.catalog", ModuleConstants.CATALOG_AUTHORITY, "ContentProvider.call(report)", error);
-            }
-        });
+        settings.report(data, identity);
     }
 
     void debug(String message) {

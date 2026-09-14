@@ -2,7 +2,6 @@ package app.revanced.bilibili.xposed;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -32,7 +31,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/** Shared native screen mounted in the module Activity or a host-owned Dialog. */
+/** Native settings screen displayed only inside the host-owned Dialog. */
 final class SettingsScreen {
     private final SettingsStore module;
     private JSONArray schema;
@@ -146,9 +145,9 @@ final class SettingsScreen {
         String state = catalog.getString("state", "");
         long readRevision = catalog.getLong("revision", -1);
         if ("applied".equals(state)) {
-            text("宿主最近读取：配置 " + readRevision + "，显示 " + catalog.getInt("after", 0)
+            text("底栏最近读取：配置 " + readRevision + "，显示 " + catalog.getInt("after", 0)
                     + " / " + catalog.getInt("before", 0) + " 个底栏按钮。", 15);
-            text("回传时间：" + DateFormat.getDateTimeInstance().format(new Date(catalog.getLong("received_at", 0))), 13);
+            text("记录时间：" + DateFormat.getDateTimeInstance().format(new Date(catalog.getLong("received_at", 0))), 13);
             if (revision != readRevision) text("新设置已保存，等待重启哔哩哔哩后读取。", 15);
         } else if ("selection_mismatch".equals(state)) {
             text("所选按钮与当前底栏不匹配，宿主已保留原样。请按下面的最新列表重新选择，或恢复显示全部。", 15);
@@ -157,23 +156,12 @@ final class SettingsScreen {
         } else if ("partial".equals(state)) {
             text("部分 Hook 安装失败，请查看 LSPosed 模块日志。", 15);
         } else {
-            text("尚未收到宿主回传。启用模块并勾选哔哩哔哩后，彻底关闭并重新打开哔哩哔哩，再返回此页。", 15);
+            text("尚未读取到底栏数据。请先进入哔哩哔哩首页，再返回此页刷新。", 15);
         }
         text("需要展示的底栏", 21).setTypeface(null, Typeface.BOLD);
         text("取消勾选即可隐藏。保存后彻底关闭并重新打开哔哩哔哩。首轮只实现底栏过滤；其他功能尚未移植。", 15);
         renderBottom(preferences, catalog.getString("tabs", "[]"));
         button("刷新状态", module::refresh, true);
-        if (close == null) button("打开哔哩哔哩", () -> {
-            Intent launch = activity.getPackageManager().getLaunchIntentForPackage(ModuleConstants.HOST);
-            if (launch == null) toast("没有找到粉版哔哩哔哩。");
-            else {
-                try { activity.startActivity(launch); }
-                catch (RuntimeException error) {
-                    android.util.Log.e(ModuleConstants.TAG, "Host launch failed", error);
-                    toast("无法打开哔哩哔哩，请从桌面启动。");
-                }
-            }
-        }, true);
         button(advanced ? "收起全部设置" : "全部设置（" + schema.length() + " 项）", () -> {
             advanced = !advanced;
             render();

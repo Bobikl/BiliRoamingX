@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashSet;
 
-/** Pure Java validation of one setting edit received from the host. */
+/** Pure Java validation shared by local edits and legacy configuration migration. */
 final class SettingsMutation {
     final String key;
     final String type;

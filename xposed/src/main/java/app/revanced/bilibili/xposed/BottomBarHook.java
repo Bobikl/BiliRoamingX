@@ -118,7 +118,7 @@ final class BottomBarHook {
         if (data == null) return;
         Object raw = bottom.get(data);
         if (!(raw instanceof List<?> tabs) || tabs.isEmpty()) return;
-        // One immutable framework snapshot keeps selection and its acknowledgement in sync.
+        // One host-local snapshot keeps selection and its acknowledgement in sync.
         Map<String, ?> snapshot = runtime.preferences.getAll();
         Object configured = snapshot.get(ModuleConstants.BOTTOM_KEY);
         Set<String> showing = new HashSet<>();

@@ -4,6 +4,8 @@
 
 首轮宿主按用户提供的 APK 改为粉版 tv.danmaku.bili 8.27.0（8270400）。首个可见功能为 Json Patch 中的底部导航过滤，其他 Json 子功能仍未移植。
 
+当前 v3 按用户最新要求仅保留宿主内嵌设置；配置与底栏目录改为宿主本地保存，旧 Remote Preferences 仅供一次迁移。v2 的跨进程目录读取失败已记录并移除相关路径，见 [v3 报告](host-only-settings-report.md)。
+
 这是逐项源码索引与初步分级，不把静态扫描当运行验证。A/B/C 是工作量预判；before/after/replace 取决于实际控制流，不能从出现 invoke 就断言可移植。所有非首轮项目保留为待分析，完整指纹和依赖见 patch-inventory.json。
 
 | Patch 名称 | 源文件 | 作用目标/指纹 | 修改类型 | integrations 调用 | before | after | replace | 资源处理 | 分类/实现 | 测试状态 |
@@ -80,7 +82,7 @@
 | Fix preference manager | [FixPreferenceManagerPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/FixPreferenceManagerPatch.kt) | PreferenceManagerFingerprint | method | widget/CheckBoxGroupPreference;->onAttachedToHierarchy | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Fix preference click | [HdPreferenceClickFixPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/HdPreferenceClickFixPatch.kt) | HdOnContactClickFingerprint<br>HdOnCourseClickFingerprint<br>HdOnImClickFingerprint<br>HdOnSettingsClickFingerprint<br>HdOnWatchLaterClickFingerprint<br>MethodFingerprint | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Hd preference fragment | [HdPreferenceFragmentPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/HdPreferenceFragmentPatch.kt) | Ltv/danmaku/bilibilihd/ui/main/preference/HdPreferenceFragment; | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
-| BiliRoamingX settings entrance | [SettingsResourcePatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/SettingsResourcePatch.kt) | BiliPreferencesFragment.onCreatePreferences | 原 resource；现运行时 Preference | SettingsEntranceHook / SettingsScreen | 无 | 原方法返回后插入唯一 key 的 Preference | 否；原方法一次 | 新实现不修改资源表；宿主全屏系统 Dialog | B / 原生入口与共用设置页已实现，非原 Fragment 全量迁移 | 15 个公开方法静态匹配；6 项写入校验测试通过；v2 入口/IPC 真机待验 |
+| BiliRoamingX settings entrance | [SettingsResourcePatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/settings/patch/SettingsResourcePatch.kt) | BiliPreferencesFragment.onCreatePreferences | 原 resource；现运行时 Preference | SettingsEntranceHook / SettingsScreen | 无 | 原方法返回后插入唯一 key 的 Preference | 否；原方法一次 | 新实现不修改资源表；宿主全屏系统 Dialog | B / v3 仅宿主 UI 与本地配置，非原 Fragment 全量迁移 | 入口显示已由 v2 真机确认；v3 编辑6项/迁移4项测试通过；本地目录显示与保存真机待验 |
 | Splash | [SplashPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/splash/SplashPatch.kt) | 见源码/依赖 Patch | resource | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 是 | C / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Custom theme color | [CustomThemePatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/theme/patch/CustomThemePatch.kt) | BuiltInThemesFingerprint<br>SkinListFingerprint<br>ThemeClickFingerprint<br>ThemeColorsFingerprint<br>ThemeHelperFingerprint<br>ThemeNameFingerprint<br>ThemeProcessorFingerprint<br>WebActivityBuildUriFingerprint | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | C / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Toast | [ToastPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/toast/patch/ToastPatch.kt) | Ltv/danmaku/bili/MainActivityV2; | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |

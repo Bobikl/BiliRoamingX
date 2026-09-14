@@ -55,7 +55,6 @@ public final class ModuleEntry extends XposedModule {
                     + "; supported host is 8.27.0/8270400");
             return;
         }
-        var preferences = getRemotePreferences(ModuleConstants.GROUP);
         Signature[] signatures = Build.VERSION.SDK_INT >= 28
                 ? info.signingInfo.getApkContentsSigners() : info.signatures;
         if (signatures == null || signatures.length != 1) throw new IllegalStateException("Unexpected host signer count");
@@ -66,7 +65,7 @@ public final class ModuleEntry extends XposedModule {
             log(Log.ERROR, ModuleConstants.TAG, "BottomBar skipped: host signer does not match official 8.27.0; fingerprint=" + fingerprint);
             return;
         }
-        HostRuntime runtime = new HostRuntime(hostApplication, hostLoader, preferences, this);
+        HostRuntime runtime = new HostRuntime(hostApplication, hostLoader, this);
         runtime.registerLifecycle();
         new BottomBarHook(this, runtime).install();
         new SettingsEntranceHook(this, runtime).install();
