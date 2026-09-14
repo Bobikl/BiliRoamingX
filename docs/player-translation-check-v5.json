@@ -1,0 +1,19 @@
+{
+  "scope": "synthetic provider connectivity; not Android runtime validation",
+  "results": [
+    {
+      "provider": "microsoft",
+      "status": "failed",
+      "error": "HTTPError",
+      "phase": "authorization",
+      "http_status": 404
+    },
+    {
+      "provider": "google",
+      "status": "failed",
+      "error": "HTTPError",
+      "phase": "translation",
+      "http_status": 403
+    }
+  ]
+}

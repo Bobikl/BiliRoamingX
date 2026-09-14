@@ -129,7 +129,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "FullScreenQuality",
@@ -140,7 +140,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "MobileFullScreenQuality",
@@ -151,7 +151,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "PlayerVersion",
@@ -162,7 +162,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "RememberLosslessSetting",
@@ -173,7 +173,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DefaultPlaybackSpeed",
@@ -184,7 +184,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "LongPressPlaybackSpeed",
@@ -195,7 +195,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "OverridePlaybackSpeed",
@@ -206,7 +206,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "TrialVipQuality",
@@ -217,7 +217,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DisableSegmentedSection",
@@ -228,7 +228,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DisableAutoNextPlay",
@@ -239,7 +239,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DisablePlayerLongPress",
@@ -250,7 +250,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "ScaleToSwitchRatio",
@@ -261,7 +261,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "ForceHwCodec",
@@ -272,7 +272,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DisableP2PUpload",
@@ -283,7 +283,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "PreferStableCdn",
@@ -294,7 +294,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "AccessKeyMain",
@@ -305,7 +305,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "AccessKeyThailand",
@@ -327,7 +327,7 @@
     "group": "播放器",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "ShowingBottomItems",
@@ -1785,7 +1785,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "EnableCustomSubtitleStyle",
@@ -1796,7 +1796,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "RemoveSubtitleBg",
@@ -1807,7 +1807,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "BoldSubtitleText",
@@ -1818,7 +1818,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleFontSizePortrait",
@@ -1829,7 +1829,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleFontSizeLandscape",
@@ -1840,7 +1840,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleFillColor",
@@ -1851,7 +1851,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleStrokeColor",
@@ -1862,7 +1862,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleStrokeWidth",
@@ -1873,7 +1873,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleOffset",
@@ -1884,7 +1884,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SubtitleTranslateServer",
@@ -1906,7 +1906,7 @@
     "group": "字幕",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DisableTeenagerDialog",

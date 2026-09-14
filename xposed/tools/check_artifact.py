@@ -81,7 +81,9 @@ if 'assets/settings-pages.json' in contents:
         walk(pages[page])
     visit('biliroaming_settings')
     assert all(item['key'] in visible_keys for item in schema), 'Some settings are unreachable'
-    assert len([item for item in schema if item['ported']]) == 16
+    assert len([item for item in schema if item['ported']]) == 45
+    assert not next(item for item in schema if item['key'] == 'access_key_th')['ported']
+    assert not any(item['ported'] for item in schema if item['key'] in ('auto_generate_subtitle', 'subtitle_translate_server'))
     live = next(item for item in schema if item['key'] == 'purify_live_popups')
     assert 'giftStar' not in live['portedOptions'] and 'shoppingSelected' not in live['portedOptions']
 host_components = None
@@ -96,6 +98,8 @@ if args.host_only:
                'com.android.tools.apk.analyzer.ApkAnalyzerCli', 'manifest', 'print', str(args.apk)]
     decoded = subprocess.run(command, capture_output=True, check=True, encoding='utf-8').stdout
     manifest = ET.fromstring(decoded)
+    assert manifest.get('{http://schemas.android.com/apk/res/android}versionCode') == '5'
+    assert manifest.get('{http://schemas.android.com/apk/res/android}versionName') == '1.23.3-lsposed.5'
     application = manifest.find('application')
     assert application is not None
     component_tags = {'activity', 'activity-alias', 'provider', 'receiver', 'service'}
@@ -108,6 +112,7 @@ report = {'apk': args.apk.name, 'bytes': args.apk.stat().st_size,
           'checks': 'passed', 'entry': entry, 'api': 102, 'scope': 'tv.danmaku.bili',
           'defined_class_count': len(classes), 'settings_count': len(schema),
           'settings_page_count': page_count,
+          'ported_settings_count': sum(item['ported'] for item in schema),
           'forbidden_marker_hits': hits, 'device_testing': 'not performed; user handles phone validation'}
 if args.host_only:
     report['settings_mode'] = 'host-only; legacy framework preferences read only for one-time migration'

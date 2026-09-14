@@ -1,8 +1,10 @@
-"""Generate the standalone editor schema from the original 1.23.3 Settings."""
+"""Generate the host editor schema from the original 1.23.3 Settings."""
 from pathlib import Path
 import json
 import re
 import xml.etree.ElementTree as ET
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 repo = Path(__file__).resolve().parents[2]
 settings_file = repo / 'integrations/app/src/main/java/app/revanced/bilibili/settings/Settings.kt'
@@ -22,6 +24,15 @@ titles.update({'showing_bottom_items': '需要展示的底栏', 'debug': '调试
                'default_playback_speed': '默认播放速度', 'long_press_playback_speed': '长按播放速度',
                'showing_drawer_items': '需要展示的侧栏'})
 fallback_titles = json.loads(Path(__file__).with_name('setting-titles.json').read_text(encoding='utf-8'))
+player_keys = {
+    'half_screen_quality', 'full_screen_quality', 'full_screen_quality_mobile', 'player_version',
+    'default_playback_speed', 'long_press_playback_speed', 'playback_speed_override', 'disable_player_long_press',
+    'remember_playback_speed', 'remember_lossless_setting', 'disable_segmented_section', 'disable_auto_next_play',
+    'scale_to_switch_ratio', 'disable_p2p_upload', 'prefer_stable_cdn', 'access_key_main', 'trial_vip_quality', 'force_hw_codec',
+    'auto_select_ai_subtitle', 'custom_subtitle', 'subtitle_remove_bg', 'subtitle_bold',
+    'subtitle_font_size_portrait', 'subtitle_font_size_landscape', 'subtitle_font_color2', 'subtitle_stroke_color',
+    'subtitle_stroke_width', 'subtitle_offset', 'subtitle_import_save',
+}
 defaults = {'Boolean': False, 'Int': 0, 'Long': 0, 'Float': 0.0, 'String': '', 'StringSet': []}
 pattern = r'@JvmField\s+val\s+(\w+)\s*=\s*(\w+)Setting\(\s*(?:key\s*=\s*)?"([^"]+)"'
 matches = list(re.finditer(pattern, source))
@@ -57,7 +68,7 @@ for i, match in enumerate(matches):
                         'title': title, 'group': groups[-1] if groups else '基础设置',
                         'dependency': dependency[1] if dependency else None,
                         'needReboot': bool(re.search(r'needReboot\s*=\s*true', declaration)),
-                        'ported': key in ('showing_bottom_items', 'debug', 'customize_home_tab', 'purify_game',
+                        'ported': key in player_keys or key in ('showing_bottom_items', 'debug', 'customize_home_tab', 'purify_game',
                             'disable_main_page_story', 'showing_drawer_items', 'purify_drawer_reddot', 'block_tips',
                             'customize_space', 'purify_splash', 'purify_live_popups', 'remove_live_mask',
                             'remove_live_watermark', 'live_no_block', 'block_up_rcmd_ads', 'block_recommend_guidance')})

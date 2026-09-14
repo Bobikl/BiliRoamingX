@@ -1,0 +1,8 @@
+{
+  "host_sha256": "00ad96b15626026c9880f08c2ff3c5a8059c08eb1683928bb0e6ed2d0b37cd7c",
+  "inventory_sha256": "873fe5cb4ae28ded272611d7f4748d4ee5869352d426d54642c8ef9433f5a38a",
+  "checks": 230,
+  "class_count": 93,
+  "failures": [],
+  "scope": "DEX declarations only; user validates runtime on phone"
+}

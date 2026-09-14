@@ -811,7 +811,7 @@
             "kind": "SwitchPreferenceCompat",
             "key": "auto_generate_subtitle",
             "title": "生成字幕",
-            "summary": "- 根据繁体字幕自动生成简体中文字幕\n- 在需要时使用三方翻译服务将英语字幕翻译为简体中文字幕",
+            "summary": "- 根据繁体字幕自动生成简体中文字幕\n- 在需要时使用三方翻译服务将英语字幕翻译为简体中文字幕\n本轮暂缓适配自动生成与翻译字幕。",
             "children": []
           },
           {
@@ -827,7 +827,8 @@
               "google"
             ],
             "page": "biliroaming_setting_subtitle_translate_server",
-            "children": []
+            "children": [],
+            "summary": "\n本轮暂缓适配自动翻译。"
           },
           {
             "kind": "Preference",
@@ -840,7 +841,7 @@
             "kind": "SwitchPreferenceCompat",
             "key": "subtitle_import_save",
             "title": "导入及保存字幕",
-            "summary": "字幕选择面板添加导入及保存字幕按钮，允许导入ass、srt、vtt、bcc(json)类型的字幕，以srt或bcc格式保存字幕",
+            "summary": "字幕选择面板添加导入及保存字幕按钮，允许导入ass、srt、vtt、bcc(json)类型的字幕，以srt或bcc格式保存字幕\n支持 UTF-8 的 ASS、SRT、VTT、JSON；保存为 ZIP，包含各语言的 JSON 和 SRT。",
             "children": []
           },
           {
@@ -859,21 +860,21 @@
         "children": [
           {
             "kind": "Preference",
-            "key": "default_speed",
+            "key": "default_playback_speed",
             "title": "默认播放速度",
             "summary": "仅应用到视频播放",
             "children": []
           },
           {
             "kind": "Preference",
-            "key": "long_press_speed",
+            "key": "long_press_playback_speed",
             "title": "长按播放速度",
             "summary": "自定义播放器长按播放速度",
             "children": []
           },
           {
             "kind": "Preference",
-            "key": "override_speed",
+            "key": "playback_speed_override",
             "title": "自定义播放速度列表",
             "summary": "同时应用到视频及听视频播放速度列表",
             "children": []
@@ -958,8 +959,9 @@
             "kind": "Preference",
             "key": "custom_access_key",
             "title": "自定义访问密钥",
-            "summary": "自定义视频播放取流访问密钥，仅支持新版播放器",
-            "children": []
+            "summary": "自定义视频播放取流访问密钥，仅支持新版播放器\n本版已接入主站新版播放接口；泰区仍待地区播放链路移植。",
+            "children": [],
+            "page": "PlayerAccessKeys"
           }
         ]
       },
@@ -972,7 +974,7 @@
             "kind": "SwitchPreferenceCompat",
             "key": "trial_vip_quality",
             "title": "无限试用会员画质",
-            "summary": "只解决试用次数问题，能否试用取决于官方接口，仅支持粉版，如不生效，尝试将播放器版本切换为旧版。",
+            "summary": "只解决试用次数问题，能否试用取决于官方接口，仅支持粉版，如不生效，尝试将播放器版本切换为旧版。\n只处理服务器已返回的 DASH 画质，实际可用性和试用时限由服务器决定。",
             "children": []
           },
           {
@@ -2371,7 +2373,8 @@
           "microsoft",
           "google"
         ],
-        "children": []
+        "children": [],
+        "summary": "\n本轮暂缓适配自动翻译。"
       }
     ]
   },
@@ -2676,6 +2679,19 @@
         "children": []
       },
       {
+        "kind": "Action",
+        "key": "subtitle_font_import",
+        "title": "导入字幕字体",
+        "summary": "选择 TTF 或 OTF 文件，不超过 16MB。",
+        "children": []
+      },
+      {
+        "kind": "Action",
+        "key": "subtitle_font_reset",
+        "title": "恢复默认字幕字体",
+        "children": []
+      },
+      {
         "kind": "Preference",
         "key": "subtitle_font_color2",
         "title": "字幕文字颜色",
@@ -2954,6 +2970,25 @@
       }
     ]
   },
+  "PlayerAccessKeys": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "access_key_main",
+        "title": "主站 AccessKey",
+        "summary": "用于主站新版播放接口。留空使用当前账号。",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "access_key_th",
+        "title": "泰区 AccessKey",
+        "summary": "依赖尚未移植的泰区播放链路。",
+        "children": []
+      }
+    ]
+  },
   "remaining_settings": {
     "kind": "PreferenceScreen",
     "children": [
@@ -2985,36 +3020,6 @@
         "kind": "Preference",
         "key": "th_server",
         "title": "泰国解析服务器",
-        "children": []
-      },
-      {
-        "kind": "Preference",
-        "key": "default_playback_speed",
-        "title": "默认播放速度",
-        "children": []
-      },
-      {
-        "kind": "Preference",
-        "key": "long_press_playback_speed",
-        "title": "长按播放速度",
-        "children": []
-      },
-      {
-        "kind": "Preference",
-        "key": "playback_speed_override",
-        "title": "自定义倍速列表",
-        "children": []
-      },
-      {
-        "kind": "Preference",
-        "key": "access_key_main",
-        "title": "主站账号访问密钥",
-        "children": []
-      },
-      {
-        "kind": "Preference",
-        "key": "access_key_th",
-        "title": "泰国账号访问密钥",
         "children": []
       },
       {

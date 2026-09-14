@@ -9,8 +9,8 @@ android {
         applicationId = "app.revanced.bilibili.xposed"
         minSdk = 26
         targetSdk = 35
-        versionCode = 4
-        versionName = "1.23.3-lsposed.4"
+        versionCode = 5
+        versionName = "1.23.3-lsposed.5"
     }
     buildFeatures { buildConfig = true }
     compileOptions {
@@ -43,6 +43,11 @@ val compilePolicyChecks by tasks.registering(JavaCompile::class) {
     source("src/main/java/app/revanced/bilibili/xposed/SettingsMutation.java")
     source("src/main/java/app/revanced/bilibili/xposed/SettingsMigration.java")
     source("src/main/java/app/revanced/bilibili/xposed/JsonFeatureFilter.java")
+    source("src/main/java/app/revanced/bilibili/xposed/PlayerPolicy.java")
+    source("src/main/java/app/revanced/bilibili/xposed/PlayerSettingsInput.java")
+    source("src/main/java/app/revanced/bilibili/xposed/SubtitleText.java")
+    source("src/main/java/app/revanced/bilibili/xposed/PlayerProto.java")
+    source("src/main/java/app/revanced/bilibili/xposed/PlayerReflection.java")
     classpath = policyChecks
     destinationDirectory.set(layout.buildDirectory.dir("policy-checks/classes"))
     sourceCompatibility = "17"
@@ -69,4 +74,12 @@ tasks.register<JavaExec>("verifyJsonFeatures") {
     classpath = files(compilePolicyChecks.flatMap { it.destinationDirectory }) + policyChecks
     mainClass.set("org.junit.runner.JUnitCore")
     args("app.revanced.bilibili.xposed.JsonFeatureFilterTest")
+}
+
+tasks.register<JavaExec>("verifyPlayerRules") {
+    group = "verification"
+    dependsOn(compilePolicyChecks)
+    classpath = files(compilePolicyChecks.flatMap { it.destinationDirectory }) + policyChecks
+    mainClass.set("org.junit.runner.JUnitCore")
+    args("app.revanced.bilibili.xposed.PlayerRulesTest")
 }

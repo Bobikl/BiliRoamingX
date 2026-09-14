@@ -37,6 +37,8 @@ def convert(node):
     attrs = {k.split('}')[-1]: resolve(v) for k, v in node.attrib.items()}
     kind = node.tag.split('.')[-1]
     result = {'kind': kind, **{k: attrs[k] for k in ('key', 'title', 'summary', 'dependency', 'entries', 'entryValues', 'radioEntries', 'radioEntryValues', 'radioEntrySummaries') if k in attrs}}
+    if result.get('key') in ('default_speed', 'long_press_speed', 'override_speed'):
+        result['key'] = {'default_speed': 'default_playback_speed', 'long_press_speed': 'long_press_playback_speed', 'override_speed': 'playback_speed_override'}[result['key']]
     if 'fragment' in attrs:
         cls = attrs['fragment'].split('.')[-1]
         result['page'] = mapping.get(cls, cls)
@@ -54,6 +56,14 @@ for cls, source in custom.items():
         setting = symbols[symbol]
         rows.append({'kind': 'Preference', 'key': setting['key'], 'title': setting['title'], 'children': []})
     pages[cls] = {'kind': 'PreferenceScreen', 'children': rows}
+pages['PlayerAccessKeys'] = {'kind': 'PreferenceScreen', 'children': [
+    {'kind': 'Preference', 'key': 'access_key_main', 'title': '主站 AccessKey', 'summary': '用于主站新版播放接口。留空使用当前账号。', 'children': []},
+    {'kind': 'Preference', 'key': 'access_key_th', 'title': '泰区 AccessKey', 'summary': '依赖尚未移植的泰区播放链路。', 'children': []},
+]}
+pages['CustomizeSubtitleStyleFragment']['children'][3:3] = [
+    {'kind': 'Action', 'key': 'subtitle_font_import', 'title': '导入字幕字体', 'summary': '选择 TTF 或 OTF 文件，不超过 16MB。', 'children': []},
+    {'kind': 'Action', 'key': 'subtitle_font_reset', 'title': '恢复默认字幕字体', 'children': []},
+]
 # Every original fragment link must resolve, including widget-based settings pages.
 def walk(row):
     yield row
@@ -61,11 +71,18 @@ def walk(row):
         yield from walk(child)
 for page in pages.values():
     for row in walk(page):
+        if row.get('key') == 'custom_access_key':
+            row['page'] = 'PlayerAccessKeys'
         assert 'page' not in row or row['page'] in pages, row
         scope_notes = {
             'purify_splash': '本版过滤新获取的开屏内容，已有开屏缓存暂未清理。',
             'disable_main_page_story': '本版仅移除首页左上角的竖屏视频入口。',
             'block_up_rcmd_ads': '本版只屏蔽部分视频弹幕广告，其他推荐广告仍待移植。',
+            'auto_generate_subtitle': '本轮暂缓适配自动生成与翻译字幕。',
+            'subtitle_translate_server': '本轮暂缓适配自动翻译。',
+            'subtitle_import_save': '支持 UTF-8 的 ASS、SRT、VTT、JSON；保存为 ZIP，包含各语言的 JSON 和 SRT。',
+            'custom_access_key': '本版已接入主站新版播放接口；泰区仍待地区播放链路移植。',
+            'trial_vip_quality': '只处理服务器已返回的 DASH 画质，实际可用性和试用时限由服务器决定。',
         }
         if row.get('key') in scope_notes:
             row['summary'] = row.get('summary', '') + '\n' + scope_notes[row['key']]
