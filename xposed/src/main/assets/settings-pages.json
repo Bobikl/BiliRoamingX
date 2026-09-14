@@ -1,0 +1,3058 @@
+{
+  "biliroaming_search_result": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_search_result",
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_settings": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "main_func_category",
+            "title": "解锁番剧限制",
+            "page": "biliroaming_setting_unlock_area_limit",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "customize_player",
+            "title": "播放器",
+            "page": "biliroaming_setting_customize_player",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_home",
+            "title": "首页",
+            "page": "biliroaming_setting_customize_home",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_dynamic",
+            "title": "动态页",
+            "page": "biliroaming_setting_customize_dynamic",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_mine",
+            "title": "我的页",
+            "page": "biliroaming_setting_customize_mine",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_live_room",
+            "title": "直播间",
+            "page": "biliroaming_setting_customize_live_room",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_video_detail",
+            "title": "视频详情页",
+            "page": "biliroaming_setting_customize_video_detail",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "space",
+            "title": "用户空间页",
+            "page": "biliroaming_setting_space",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "search",
+            "title": "搜索页",
+            "page": "biliroaming_setting_customize_search",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "misc",
+            "title": "杂项",
+            "page": "biliroaming_setting_misc",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "tool",
+            "title": "工具",
+            "page": "biliroaming_setting_tool",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "backup_category",
+            "title": "备份与恢复",
+            "page": "biliroaming_setting_backup",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "reboot",
+            "title": "重启",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "about",
+            "title": "关于",
+            "page": "biliroaming_setting_about",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "title": "其他配置",
+            "page": "remaining_settings",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_about": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "version",
+            "title": "检查更新",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "feedback",
+            "title": "反馈",
+            "summary": "反馈遇到的问题或请求某个功能",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "project_url",
+            "title": "项目地址",
+            "summary": "https://github.com/BiliRoamingX/BiliRoamingX",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "tg_link",
+            "title": "TG更新频道",
+            "summary": "https://t.me/bb_show",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "debug",
+            "title": "调试模式",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "share_log",
+            "title": "分享日志",
+            "summary": "非崩溃问题需开启调试模式复现一遍日志才有效，否则反馈不予受理",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_backup": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "backup",
+            "title": "备份配置",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "restore",
+            "title": "恢复配置",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_block_follow": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "block_follow_button",
+        "entries": [
+          "评论",
+          "动态"
+        ],
+        "entryValues": [
+          "comment",
+          "dynamic"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_cover_ratio": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "pegasus_cover_ratio",
+        "title": "裁切实现自定义小卡（双列显示）推荐的封面比例",
+        "radioEntries": [
+          "默认",
+          "16:9",
+          "4:3"
+        ],
+        "radioEntryValues": [
+          "0",
+          "1.777778",
+          "1.333333"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_customize_bottom": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "showing_bottom_items",
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_customize_drawer": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "showing_drawer_items",
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_customize_dynamic": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "prefer_video_tab",
+            "title": "首选视频标签",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "purify_city",
+            "title": "移除同城标签",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "purify_campus",
+            "title": "移除校园标签",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "customize_dynamic_all_rm_topic",
+            "title": "移除热门话题（综合）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "customize_dynamic_all_rm_up",
+            "title": "移除最常访问（综合）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "customize_dynamic_video_rm_up",
+            "title": "移除最常访问（视频）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "dynamic_force_old_tab",
+            "title": "强制标签栏样式为旧版",
+            "summary": "恢复标签栏样式为视频和关注作为一级标签，取消二级标签，允许侧滑切换",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_filter_dynamic",
+        "title": "动态过滤",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "filter_apply_to_video",
+            "title": "过滤设置同时作用于视频分区",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "customize_dynamic_rm_blocked",
+            "title": "屏蔽无权查看动态",
+            "summary": "例如充电专属",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "customize_dynamic_rm_ad_link",
+            "title": "屏蔽跳转广告动态",
+            "summary": "例如UP主的推荐",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "customize_dynamic_rm_up_reservation",
+            "title": "屏蔽直播预约动态",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "dynamic_rm_cm",
+            "title": "屏蔽推广动态",
+            "summary": "时间线乱序展示且没有投稿时间",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "dynamic_rm_story",
+            "title": "屏蔽动态视频",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_dynamic_by_type",
+            "title": "按类型过滤",
+            "page": "biliroaming_setting_filter_dynamic_by_type",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_dynamic_by_keyword",
+            "title": "按关键词过滤",
+            "page": "FilterDynamicByKeywordFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_customize_home": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_customize_home",
+        "title": "部分选项需要重启两次才能生效",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "customize_bottom",
+            "title": "需要展示的底栏",
+            "page": "biliroaming_setting_customize_bottom",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "home_tab",
+            "title": "需要隐藏的顶部标签",
+            "summary": "请勿全部选择，会使用之前的的标签",
+            "page": "biliroaming_setting_home_tab",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_home_recommend",
+            "title": "过滤推荐内容",
+            "page": "biliroaming_setting_filter_home",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_popular",
+            "title": "过滤热门内容",
+            "page": "biliroaming_setting_filter_popular",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_auto_refresh",
+            "title": "禁止自动刷新",
+            "summary": "禁止在退至后台、切换其他页面一段时间后返回或热重启时自动刷新页面",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_recommend_guidance",
+            "title": "屏蔽个性化推荐指引",
+            "summary": "当关闭个性化推荐时，屏蔽开启指引弹窗",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "add_bangumi",
+            "title": "添加其他地区番剧",
+            "summary": "在顶部标签添加大陆/港澳台番剧分页",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "add_movie",
+            "title": "添加其他地区影视",
+            "summary": "在顶部标签添加大陆/港澳台影视分页",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "add_korea",
+            "title": "添加其他地区韩综",
+            "summary": "在顶部标签添加港澳台韩综分页",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "purify_game",
+            "title": "隐藏游戏中心",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_top_activity",
+            "title": "隐藏右上角热门活动图标",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "drawer",
+            "title": "移动我的页面到侧边栏",
+            "summary": "移动后，可以点击首页的头像打开侧边栏。关闭时，需要重启两次客户端才能复原。如果无法还原，请重启手机。",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_main_page_story",
+            "title": "点击头像跳转“我的”页面",
+            "summary": "点击头像跳转至“我的”页面而不是快捷刷短视频。若启用“移动我的页面到侧边栏”则本项无效。\n本版仅移除首页左上角的竖屏视频入口。",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_home_recent_used",
+            "title": "屏蔽最近使用",
+            "summary": "屏蔽最近页面的最近使用，例如最近使用的小程序",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "dynamic_no_up_recall",
+            "title": "动态标签不显示最新UP主头像",
+            "summary": "仅在动态标签角标上显示未读动态数",
+            "children": []
+          },
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "pegasus_cover_ratio",
+            "title": "推荐封面比例",
+            "radioEntries": [
+              "默认",
+              "16:9",
+              "4:3"
+            ],
+            "radioEntryValues": [
+              "0",
+              "1.777778",
+              "1.333333"
+            ],
+            "page": "biliroaming_setting_cover_ratio",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_customize_live_room": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "forbid_switch_live_room",
+            "title": "禁止滑动切换直播间",
+            "summary": "禁止上下滑动切换直播间",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_live_room_double_click",
+            "title": "禁用双击点赞",
+            "summary": "将双击点赞行为更换为暂停/播放",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "purify_live_popups",
+            "title": "净化直播间浮窗",
+            "summary": "净化直播间各种浮窗",
+            "page": "biliroaming_setting_live_popups",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_live_mask",
+            "title": "移除马赛克遮罩",
+            "summary": "移除部分直播间官方添加的屏幕内容马赛克遮罩",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "default_max_qn",
+            "title": "默认原画",
+            "summary": "进入直播间时默认选择原画画质，会降低直播间的加载速度",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_slide_left",
+            "title": "禁止向左滑动弹出抽屉",
+            "summary": "侧滑返回时容易误触",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_auto_float",
+            "title": "禁止自动开启小窗播放",
+            "summary": "直播间点击小窗播放时禁止自动开启“播放被中断时自动小窗播放”选项",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_live_watermark",
+            "title": "移除水印",
+            "summary": "移除左上角直播和房间号水印",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "live_no_block",
+            "title": "屏蔽实名认证弹窗",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_customize_mine": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "drawer_style_value",
+        "title": "页面样式",
+        "radioEntries": [
+          "默认",
+          "按钮",
+          "列表"
+        ],
+        "radioEntryValues": [
+          "0",
+          "1",
+          "2"
+        ],
+        "children": []
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "purify_drawer_reddot",
+            "title": "净化红点",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_vip_section",
+            "title": "移除我的大会员横幅",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_tips",
+            "title": "屏蔽活动条",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_drawer",
+            "title": "需要展示的项目",
+            "page": "biliroaming_setting_customize_drawer",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "add_channel",
+            "title": "添加频道中心",
+            "summary": "“更多服务”添加“频道中心”选项，允许查看所有频道，启用后“我的收藏”页面同时添加“频道”标签",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "add_podcast",
+            "title": "添加听视频",
+            "summary": "Play版上“更多服务”添加“听视频”选项",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "switch_dark_dialog",
+            "title": "切换深色模式时弹框确认",
+            "summary": "当深色跟随系统启用时，点击右上角切换深色模式图标时弹框确认，防止误触",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_customize_player": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_quality",
+        "title": "清晰度",
+        "children": [
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "half_screen_quality",
+            "title": "视频半屏清晰度",
+            "radioEntries": [
+              "默认",
+              "跟随全屏清晰度",
+              "8K 超高清",
+              "杜比视界",
+              "HDR 真彩",
+              "4K 超清",
+              "1080P 60帧",
+              "1080P 高码率",
+              "1080P 高清",
+              "720P 60帧",
+              "720P 高清",
+              "480P 清晰",
+              "360P 流畅",
+              "240P 极速"
+            ],
+            "radioEntryValues": [
+              "0",
+              "1",
+              "127",
+              "126",
+              "125",
+              "120",
+              "116",
+              "112",
+              "80",
+              "74",
+              "64",
+              "32",
+              "16",
+              "6"
+            ],
+            "page": "biliroaming_setting_half_screen_quality",
+            "children": []
+          },
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "full_screen_quality",
+            "title": "Wi-Fi网络视频全屏清晰度",
+            "radioEntries": [
+              "默认",
+              "8K 超高清",
+              "杜比视界",
+              "HDR 真彩",
+              "4K 超清",
+              "1080P 60帧",
+              "1080P 高码率",
+              "1080P 高清",
+              "720P 60帧",
+              "720P 高清",
+              "480P 清晰",
+              "360P 流畅",
+              "240P 极速"
+            ],
+            "radioEntryValues": [
+              "0",
+              "127",
+              "126",
+              "125",
+              "120",
+              "116",
+              "112",
+              "80",
+              "74",
+              "64",
+              "32",
+              "16",
+              "6"
+            ],
+            "page": "biliroaming_setting_full_screen_quality",
+            "children": []
+          },
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "full_screen_quality_mobile",
+            "title": "移动网络视频全屏清晰度",
+            "radioEntries": [
+              "默认",
+              "8K 超高清",
+              "杜比视界",
+              "HDR 真彩",
+              "4K 超清",
+              "1080P 60帧",
+              "1080P 高码率",
+              "1080P 高清",
+              "720P 60帧",
+              "720P 高清",
+              "480P 清晰",
+              "360P 流畅",
+              "240P 极速"
+            ],
+            "radioEntryValues": [
+              "0",
+              "127",
+              "126",
+              "125",
+              "120",
+              "116",
+              "112",
+              "80",
+              "74",
+              "64",
+              "32",
+              "16",
+              "6"
+            ],
+            "page": "biliroaming_setting_full_screen_quality_mobile",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_subtitle",
+        "title": "字幕",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "auto_generate_subtitle",
+            "title": "生成字幕",
+            "summary": "- 根据繁体字幕自动生成简体中文字幕\n- 在需要时使用三方翻译服务将英语字幕翻译为简体中文字幕",
+            "children": []
+          },
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "subtitle_translate_server",
+            "title": "翻译服务提供商",
+            "radioEntries": [
+              "微软",
+              "谷歌"
+            ],
+            "radioEntryValues": [
+              "microsoft",
+              "google"
+            ],
+            "page": "biliroaming_setting_subtitle_translate_server",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "customize_subtitle_style",
+            "title": "字幕样式",
+            "page": "CustomizeSubtitleStyleFragment",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "subtitle_import_save",
+            "title": "导入及保存字幕",
+            "summary": "字幕选择面板添加导入及保存字幕按钮，允许导入ass、srt、vtt、bcc(json)类型的字幕，以srt或bcc格式保存字幕",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "auto_select_ai_subtitle",
+            "title": "自动选择AI中文字幕",
+            "summary": "当视频没有CC中文字幕时，自动选择可用的AI中文字幕",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_speed",
+        "title": "速度",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "default_speed",
+            "title": "默认播放速度",
+            "summary": "仅应用到视频播放",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "long_press_speed",
+            "title": "长按播放速度",
+            "summary": "自定义播放器长按播放速度",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "override_speed",
+            "title": "自定义播放速度列表",
+            "summary": "同时应用到视频及听视频播放速度列表",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_player_long_press",
+            "title": "禁止长按倍速播放",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remember_playback_speed",
+            "title": "记住播放速度变化",
+            "summary": "播放速度变化应用于所有视频",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_other",
+        "title": "其它",
+        "children": [
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "player_version",
+            "title": "播放器版本",
+            "radioEntries": [
+              "默认",
+              "旧版",
+              "新版"
+            ],
+            "radioEntryValues": [
+              "0",
+              "1",
+              "2"
+            ],
+            "page": "biliroaming_setting_player_version",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remember_lossless_setting",
+            "title": "记住无损设置开关状态",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_segmented_section",
+            "title": "全局关闭章节进度条",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_auto_next_play",
+            "title": "小窗播放时禁止自动连播相关视频",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "scale_to_switch_ratio",
+            "title": "重定义双指缩放手势",
+            "summary": "将双指缩放功能重定义为切换画面尺寸（适应/填充）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_p2p_upload",
+            "title": "禁止直播及视频P2P上传",
+            "summary": "有助于减少网络带宽占用，同时避免运营商针对PCDN可能的限速或短时网络中断",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "prefer_stable_cdn",
+            "title": "优选稳定CDN",
+            "summary": "观看视频时，优先选择大厂稳定的CDN节点播放，如若遇到视频经常卡顿问题，可启用此选项。",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "custom_access_key",
+            "title": "自定义访问密钥",
+            "summary": "自定义视频播放取流访问密钥，仅支持新版播放器",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_unstable",
+        "title": "实验性",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "trial_vip_quality",
+            "title": "无限试用会员画质",
+            "summary": "只解决试用次数问题，能否试用取决于官方接口，仅支持粉版，如不生效，尝试将播放器版本切换为旧版。",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "force_hw_codec",
+            "title": "强制硬解",
+            "summary": "B站一般会优先硬解，视情况启用",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_customize_search": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "search_area_bangumi",
+            "title": "开启其它地区番剧搜索",
+            "summary": "添加其它地区番剧搜索结果，需要解析服务器支持",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "search_area_movie",
+            "title": "开启其它地区影剧搜索",
+            "summary": "添加其它地区影剧搜索结果，需要解析服务器支持",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_purify_search_types",
+            "title": "净化搜索页面",
+            "page": "biliroaming_setting_purify_search_types",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "search_type",
+            "title": "按类型净化搜索结果",
+            "page": "biliroaming_setting_filter_search_type",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "search_keywords",
+            "title": "按关键词净化搜索结果",
+            "page": "FilterSearchKeywordsFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_customize_space": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "customize_space",
+        "title": "选择要屏蔽的元素（全选会让你什么也看不到）",
+        "entries": [
+          "分页：主页",
+          "分页：动态",
+          "分页：投稿",
+          "分页：商品",
+          "分页：追番",
+          "分页：课堂",
+          "直播",
+          "充电",
+          "大航海",
+          "推广橱窗",
+          "视频",
+          "专栏",
+          "音频",
+          "最近追番",
+          "最近投币",
+          "最近点赞",
+          "最近追漫",
+          "玩的游戏",
+          "课堂",
+          "粉丝装扮",
+          "收藏夹",
+          "comic list",
+          "ugc season list",
+          "数字藏品展现",
+          "NFT头像"
+        ],
+        "entryValues": [
+          "tab.home",
+          "tab.dynamic",
+          "tab.contribute",
+          "tab.shop",
+          "tab.bangumi",
+          "tab.cheese",
+          "liveEntry",
+          "chargeResult",
+          "guard",
+          "adV2",
+          "archiveVideo",
+          "article",
+          "audio",
+          "season",
+          "coinVideo",
+          "recommendVideo",
+          "followComicList",
+          "spaceGame",
+          "cheeseVideo",
+          "fansDress",
+          "favoriteBox",
+          "comicList",
+          "ugcSeasonList",
+          "contractResource",
+          "nftShowModule"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_customize_video_detail": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "auto_like",
+            "title": "自动点赞",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "save_comment_image",
+            "title": "笔记图片长按预览保存",
+            "summary": "笔记图片点开后长按保存到本地",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "play_arc_conf",
+            "title": "解除播放限制",
+            "summary": "解除部分版权视频禁止后台播放、小窗播放、投屏、听视频等限制",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "replace_story_video",
+            "title": "替换竖屏模式视频",
+            "summary": "替换竖屏模式视频为正常视频，竖屏按钮需要到播放设置里的竖屏模式设置里关闭",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_story_full",
+            "title": "隐藏竖屏按钮",
+            "summary": "横屏视频半屏时不显示竖屏按钮",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_remove_video_popups",
+            "title": "移除视频浮窗",
+            "page": "biliroaming_setting_video_popups",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_dm_feedback",
+            "title": "屏蔽弹幕氛围反馈",
+            "summary": "屏蔽播放结束时的弹幕氛围反馈",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_fan_guide",
+            "title": "屏蔽关注UP主引导",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_elec_button",
+            "title": "移除充电按钮",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_live_order",
+            "title": "屏蔽直播预约横幅",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_activity_tab",
+            "title": "隐藏活动标签",
+            "summary": "隐藏“一起聊”等活动标签",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "not_lock_orientation",
+            "title": "不锁定屏幕旋转方向",
+            "summary": "HD版在系统设置开启自动旋转屏幕方向时，播放竖屏视频不锁定屏幕旋转方向，允许竖屏全屏播放",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "time_airborne",
+            "title": "时间点空降",
+            "summary": "使所有带有时间点的弹幕、分P或交互视频评论内的时间点均可以空降",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "old_dm_panel",
+            "title": "恢复旧版弹幕设置面板",
+            "summary": "目前主要区别在于旧版有弹幕优选，可以过滤更多弹幕",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_video_relate",
+            "title": "视频下方推荐过滤",
+            "page": "biliroaming_setting_video_detail_filter",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_filter_story",
+            "title": "竖屏模式视频过滤",
+            "page": "biliroaming_setting_filter_story",
+            "children": []
+          },
+          {
+            "kind": "RadioGroupEntrancePreference",
+            "key": "story_ui_style",
+            "title": "竖屏模式页面样式",
+            "radioEntries": [
+              "默认",
+              "样式1",
+              "样式2",
+              "样式3"
+            ],
+            "radioEntryValues": [
+              "0",
+              "4",
+              "6",
+              "7"
+            ],
+            "page": "biliroaming_setting_story_ui_style",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_external_downloader",
+            "title": "外部视频下载器",
+            "page": "biliroaming_setting_external_downloader",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_comment",
+        "title": "评论",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_word_search",
+            "title": "屏蔽评论关键词搜索功能",
+            "summary": "屏蔽评论蓝色关键词点击触发跳转搜索功能",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_comment_guide",
+            "title": "屏蔽评论引导",
+            "summary": "屏蔽详情页及评论页的评论引导提示",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_comment_feedback",
+            "title": "屏蔽评论氛围反馈",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_video_comment",
+            "title": "屏蔽评论区",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "check_comment",
+            "title": "报告评论审查结果",
+            "summary": "检测评论是否正常发布并公开，带图评论结果仅供参考",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "unlock_gif",
+            "title": "允许非会员用户上传GIF动图",
+            "summary": "同时图片显示一视同仁，统一去掉右上角大专属图标，放大1.5倍",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_filter_comment",
+            "title": "评论过滤",
+            "page": "biliroaming_setting_filter_comment",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_video_detail_ad",
+        "title": "广告",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_up_rcmd_ads",
+            "title": "屏蔽UP主推荐广告",
+            "summary": "屏蔽视频下方推荐栏及视频播放过程中，浮窗出现的UP主推荐广告，开启后会同时屏蔽评论区顶部推广横幅\n本版只屏蔽部分视频弹幕广告，其他推荐广告仍待移植。",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_bangumi_page_ads",
+            "title": "屏蔽番剧页面广告",
+            "summary": "屏蔽番剧页面弹窗广告及会员购",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_video_detail_other",
+        "title": "其它",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_auto_select",
+            "title": "禁止自动转到动态",
+            "summary": "禁止评论带图时自动勾选转到动态",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_auto_subscribe",
+            "title": "禁止自动订阅合集",
+            "summary": "禁止收藏有合集的视频时自动勾选订阅合集",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "old_fav",
+            "title": "强制旧版收藏逻辑",
+            "summary": "将新版的点按收藏至默认文件夹，长按选择文件夹收藏逻辑恢复为旧版点按选择文件夹收藏",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "no_colorful_danmaku",
+            "title": "去掉会员彩色弹幕多彩效果",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "fake_not_in_multi_window",
+            "title": "伪装未处于多窗口模式",
+            "summary": "允许播放页小窗或分屏时全屏播放，可能导致UI错乱",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_display_size": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "display_size",
+        "title": "调整显示大小，以整体缩放APP内显示内容",
+        "radioEntries": [
+          "更小",
+          "较小",
+          "小",
+          "默认",
+          "大",
+          "较大",
+          "更大"
+        ],
+        "radioEntryValues": [
+          "-0.75",
+          "-0.5",
+          "-0.25",
+          "0",
+          "0.25",
+          "0.5",
+          "0.75"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_external_downloader": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "external_downloader",
+            "title": "外部视频下载器",
+            "summary": "启用选项后，点击缓存按钮时询问是否使用外部视频下载器下载，需要先设置下载器包名并安装对应下载器。",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "package_name",
+            "title": "下载器包名",
+            "summary": "推荐使用 Seal",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_filter_comment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_comment_only_at",
+            "title": "屏蔽仅“@xxx”评论",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_comment_goods",
+            "title": "屏蔽UP主带货评论",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_comment_by_keyword",
+            "title": "按关键词过滤",
+            "page": "FilterCommentByKeywordFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_filter_dynamic_by_type": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "customize_dynamic_type",
+        "title": "选择需要移除的类型",
+        "entries": [
+          "转发",
+          "投稿视频",
+          "番剧、电影等",
+          "付费内容 1",
+          "付费内容 2",
+          "折叠",
+          "文字",
+          "图文",
+          "文章",
+          "音频",
+          "通用 方形",
+          "通用 竖形",
+          "直播",
+          "播放列表",
+          "广告",
+          "小程序",
+          "订阅",
+          "新订阅",
+          "直播推荐",
+          "横幅",
+          "合集",
+          "故事",
+          "话题推荐",
+          "付费更新",
+          "话题集合",
+          "通知"
+        ],
+        "entryValues": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "14",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "15",
+          "16",
+          "17",
+          "21",
+          "18",
+          "19",
+          "20",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26"
+        ],
+        "radioEntrySummaries": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "你可能感兴趣的UP主",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_filter_home": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "filter_home_recommend_by_type",
+            "title": "按类型过滤",
+            "page": "biliroaming_setting_filter_home_by_type",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_home_recommend_by_keyword",
+            "title": "按关键词过滤",
+            "page": "FilterHomeRcmdByKeywordFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_filter_home_by_type": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "customize_home_recommend",
+        "title": "选择需要移除的类型",
+        "entries": [
+          "广告",
+          "游戏",
+          "轮播图",
+          "通知",
+          "文章",
+          "动态",
+          "竖屏视频",
+          "直播",
+          "内联视频",
+          "PGC 内容",
+          "课堂",
+          "漫画",
+          "无权查看视频",
+          "大卡",
+          "中卡",
+          "小卡"
+        ],
+        "entryValues": [
+          "advertisement",
+          "game",
+          "banner",
+          "notify",
+          "article",
+          "picture",
+          "vertical",
+          "live",
+          "inline",
+          "bangumi",
+          "course",
+          "comic",
+          "cannot_play",
+          "large_cover",
+          "middle_cover",
+          "small_cover"
+        ],
+        "radioEntrySummaries": [
+          "包含轮播图的广告",
+          "",
+          "",
+          "追番更新、活动提示",
+          "",
+          "一般带有图文标签",
+          "",
+          "",
+          "",
+          "番剧、电影、电视剧、纪录片……",
+          "",
+          "",
+          "例如充电专属",
+          "单列显示的",
+          "",
+          "双列显示的"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_filter_popular": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_popular_top_entrance",
+            "title": "移除顶部分类列表",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_popular_topic_list",
+            "title": "移除热门话题列表",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_popular_rcmd_up",
+            "title": "过滤推荐的UP主",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_popular_live",
+            "title": "过滤推荐的直播",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_popular_by_keyword",
+            "title": "按关键词过滤",
+            "summary": "复用首页推荐关键词过滤",
+            "page": "FilterHomeRcmdByKeywordFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_filter_search_type": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "filter_search_type",
+        "title": "选择需要屏蔽的搜索结果类型",
+        "entries": [
+          "热搜横幅",
+          "投稿视频",
+          "相关搜索",
+          "游戏",
+          "UP主",
+          "广告",
+          "漫画",
+          "频道",
+          "番剧",
+          "话题",
+          "合集",
+          "专栏",
+          "动态",
+          "直播",
+          "课堂"
+        ],
+        "entryValues": [
+          "hot_banner",
+          "video",
+          "related_search",
+          "game",
+          "user",
+          "ad",
+          "comic",
+          "channel",
+          "bangumi",
+          "subject",
+          "collection",
+          "article",
+          "twitter",
+          "live",
+          "ketang"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_filter_story": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "filter_story_by_type",
+            "title": "按类型过滤",
+            "page": "biliroaming_setting_filter_story_by_type",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "filter_story_by_keyword",
+            "title": "按关键词过滤",
+            "summary": "复用首页推荐关键词过滤",
+            "page": "FilterHomeRcmdByKeywordFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_filter_story_by_type": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "filter_story",
+        "title": "选择需要移除的类型",
+        "entries": [
+          "广告",
+          "直播",
+          "课堂"
+        ],
+        "entryValues": [
+          "ad",
+          "live",
+          "course"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_full_screen_quality": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "full_screen_quality",
+        "title": "设置Wi-Fi网络下视频全屏播放时默认的清晰度，当播放器画质选项为自动时此选项不生效",
+        "radioEntries": [
+          "默认",
+          "8K 超高清",
+          "杜比视界",
+          "HDR 真彩",
+          "4K 超清",
+          "1080P 60帧",
+          "1080P 高码率",
+          "1080P 高清",
+          "720P 60帧",
+          "720P 高清",
+          "480P 清晰",
+          "360P 流畅",
+          "240P 极速"
+        ],
+        "radioEntryValues": [
+          "0",
+          "127",
+          "126",
+          "125",
+          "120",
+          "116",
+          "112",
+          "80",
+          "74",
+          "64",
+          "32",
+          "16",
+          "6"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_full_screen_quality_mobile": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "full_screen_quality_mobile",
+        "title": "设置移动网络下视频全屏播放时默认的清晰度，当播放器画质选项为自动时此选项不生效",
+        "radioEntries": [
+          "默认",
+          "8K 超高清",
+          "杜比视界",
+          "HDR 真彩",
+          "4K 超清",
+          "1080P 60帧",
+          "1080P 高码率",
+          "1080P 高清",
+          "720P 60帧",
+          "720P 高清",
+          "480P 清晰",
+          "360P 流畅",
+          "240P 极速"
+        ],
+        "radioEntryValues": [
+          "0",
+          "127",
+          "126",
+          "125",
+          "120",
+          "116",
+          "112",
+          "80",
+          "74",
+          "64",
+          "32",
+          "16",
+          "6"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_half_screen_quality": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "half_screen_quality",
+        "title": "设置视频半屏播放时的清晰度，设置后会大幅降低视频的首次播放加载速度，旧版播放器仅支持跟随全屏清晰度",
+        "radioEntries": [
+          "默认",
+          "跟随全屏清晰度",
+          "8K 超高清",
+          "杜比视界",
+          "HDR 真彩",
+          "4K 超清",
+          "1080P 60帧",
+          "1080P 高码率",
+          "1080P 高清",
+          "720P 60帧",
+          "720P 高清",
+          "480P 清晰",
+          "360P 流畅",
+          "240P 极速"
+        ],
+        "radioEntryValues": [
+          "0",
+          "1",
+          "127",
+          "126",
+          "125",
+          "120",
+          "116",
+          "112",
+          "80",
+          "74",
+          "64",
+          "32",
+          "16",
+          "6"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_home_tab": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "customize_home_tab",
+        "entries": [
+          "直播",
+          "推荐",
+          "热门",
+          "番剧",
+          "影视",
+          "韩综",
+          "其它"
+        ],
+        "entryValues": [
+          "live",
+          "promo",
+          "hottopic",
+          "bangumi",
+          "movie",
+          "korea",
+          "other_tabs"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_live_popups": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "purify_live_popups",
+        "entries": [
+          "购物卡片",
+          "购物精选",
+          "关注提醒",
+          "直播预约",
+          "投喂支持",
+          "滚动横幅",
+          "电池任务",
+          "正在去买",
+          "礼物星球",
+          "主播帮玩",
+          "各种+1",
+          "心愿助力",
+          "直播效果打分"
+        ],
+        "entryValues": [
+          "shoppingCard",
+          "shoppingSelected",
+          "follow",
+          "reserve",
+          "gift",
+          "banner",
+          "task",
+          "gotoBuy",
+          "giftStar",
+          "playTogether",
+          "plusOne",
+          "wish",
+          "qoe"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_misc": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "teenagers_mode_dialog",
+            "title": "关闭青少年模式弹窗",
+            "summary": "仍可从侧滑菜单进入青少年模式",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "follow_button",
+            "title": "隐藏关注按钮",
+            "summary": "隐藏评论、动态等右上角的关注按钮",
+            "page": "biliroaming_setting_block_follow",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "text_fold",
+            "title": "文本折叠控制",
+            "summary": "支持自定义评论及动态开始折叠的文本行数，0表示默认",
+            "page": "TextFoldFragment",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "delay_download_modules",
+            "title": "按需下载组件库",
+            "summary": "用到相应功能时才下载对应组件，节省存储空间",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "music_notification",
+            "title": "原生音乐通知样式",
+            "summary": "强制音乐通知为原生样式",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "number_format",
+            "title": "数量精确展示",
+            "summary": "我的页面及个人空间页动态、关注、粉丝、获赞数等展示精确数量",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "auto_receive_coupon",
+            "title": "自动领取卡券及经验",
+            "summary": "大会员自动领取每月B币券、装扮体验卡、每日观看及分享视频经验等",
+            "children": []
+          },
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "display_size",
+            "title": "调整显示大小",
+            "radioEntries": [
+              "更小",
+              "较小",
+              "小",
+              "默认",
+              "大",
+              "较大",
+              "更大"
+            ],
+            "radioEntryValues": [
+              "-0.75",
+              "-0.5",
+              "-0.25",
+              "0",
+              "0.25",
+              "0.5",
+              "0.75"
+            ],
+            "page": "biliroaming_setting_display_size",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "enable_av",
+            "title": "显示AV号",
+            "summary": "视频详情页显示为AV号，同时净化分享启用时，分享链接中的BV号也将被替换为AV号",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "enable_doc_provider",
+            "title": "允许三方APP访问私有存储",
+            "summary": "允许三方APP（例如MT管理器）通过访问外部存储的方式访问私有存储下的文件",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_avif",
+            "title": "禁用AVIF图像格式",
+            "summary": "当遇到保存的图片不能查看时可启用",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disallow_collect_privacy_info",
+            "title": "禁止采集隐私信息",
+            "summary": "例如已安装应用列表，Wi-Fi ssid，DeviceId等",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "disable_non_official_alert",
+            "title": "禁用打开非官方网页警告",
+            "summary": "禁用内部浏览器打开非官方网页时底部横条警告",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_theme",
+        "title": "主题",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "custom_theme",
+            "title": "自定义主题色",
+            "summary": "添加自定义主题颜色的功能（需从我的右上角调色盘图标进入）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "skin",
+            "title": "启用自制主题",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "skin_json_pref",
+            "title": "导入自制主题配置",
+            "dependency": "skin",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_copy",
+        "title": "复制",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "comment_copy",
+            "title": "去除长按复制",
+            "summary": "禁用长按评论/动态/视频简介复制到剪切板（减少误触）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "comment_copy_enhance",
+            "title": "长按自由复制",
+            "summary": "长按私信/评论/动态/视频简介时弹出自由选择对话框，需开启“去除长按复制”，新版评论需弹窗后点击复制按钮",
+            "dependency": "comment_copy",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_share",
+        "title": "分享",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "purify_share",
+            "title": "净化分享",
+            "summary": "移除分享链接中的跟踪信息，同时替换 b23.tv 短链为原始链接（短链也包含部分跟踪信息）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "mini_program",
+            "title": "去你大爷的小程序",
+            "summary": "以普通网页，而不是小程序的形式分享到QQ或微信",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_splash",
+        "title": "启动图",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "custom_splash",
+            "title": "替换启动图",
+            "summary": "替换启动图为自定义图片（不选择图片则隐藏）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "custom_splash_logo",
+            "title": "替换启动Logo",
+            "summary": "替换底部启动Logo为自定义图片（不选择图片则隐藏，延迟生效）",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "full_splash",
+            "title": "强制满屏启动图",
+            "summary": "去两头留中间形式满屏，无论是否自定启动图",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_update",
+        "title": "更新",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "block_update",
+            "title": "禁止APP检查官方更新",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "custom_update",
+            "title": "允许检查预构建包更新",
+            "summary": "允许APP检查作者官方项目提供的预构建漫游X集成包更新",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "purify_splash",
+            "title": "净化开屏页面",
+            "summary": "去除启动客户端时的推广\n本版过滤新获取的开屏内容，已有开屏缓存暂未清理。",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "key": "category_always_enabled",
+        "title": "始终启用功能",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "prefs_clear_app_icon",
+            "title": "干净的APP图标",
+            "summary": "始终替换APP图标为不带推广内容的干净图标",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "prefs_themed_icon",
+            "title": "带主题的应用图标",
+            "summary": "适配 Android 13 带主题的应用图标特性，需要启动器支持。",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "prefs_follow_dark",
+            "title": "开屏页背景色跟随深色模式",
+            "summary": "同时适配 Android 12 SplashScreen 特性，需要在设置中开启“深色跟随系统”。",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "prefs_per_app_language",
+            "title": "按应用设定语言",
+            "summary": "适配 Android 13 按应用设定语言特性，允许在系统设置中单独设置本APP的语言偏好。",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "prefs_keep_data",
+            "title": "APP卸载时保留数据",
+            "summary": "适配 Android 10 APP卸载时保留应用数据特性。",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_player_version": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "player_version",
+        "radioEntries": [
+          "默认",
+          "旧版",
+          "新版"
+        ],
+        "radioEntryValues": [
+          "0",
+          "1",
+          "2"
+        ],
+        "radioEntrySummaries": [
+          "",
+          "较高版本上由于缺少官方维护，可能存在问题，不建议使用",
+          ""
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_purify_search_types": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "purify_search_types",
+        "entries": [
+          "默认关键词",
+          "热搜",
+          "发现"
+        ],
+        "entryValues": [
+          "words",
+          "trending",
+          "recommend"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_space": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "fix_space",
+            "title": "修复UP主空间",
+            "summary": "修复部分被屏蔽的UP主空间",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "add_article_tab",
+            "title": "添加专栏标签",
+            "summary": "在投稿标签下的图文子标签前添加专栏标签，允许单独查看用户发布的专栏文章",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "ignore_blacklist",
+            "title": "允许查看拉黑你的UP主空间",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "uid_copy_no_prefix",
+            "title": "复制UID时去掉“UID:”前缀",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "fragment_customize_space",
+            "title": "需要屏蔽的元素",
+            "page": "biliroaming_setting_customize_space",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_story_ui_style": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "story_ui_style",
+        "radioEntries": [
+          "默认",
+          "样式1",
+          "样式2",
+          "样式3"
+        ],
+        "radioEntryValues": [
+          "0",
+          "4",
+          "6",
+          "7"
+        ],
+        "radioEntrySummaries": [
+          "",
+          "操作按钮在右侧，左滑展示UP主投稿视频",
+          "操作按钮在底部，左滑展示UP主投稿视频",
+          "操作按钮在底部，左滑展示评论"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_subtitle_translate_server": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "subtitle_translate_server",
+        "radioEntries": [
+          "微软",
+          "谷歌"
+        ],
+        "radioEntryValues": [
+          "microsoft",
+          "google"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_tool": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "route",
+            "title": "应用内打开链接",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "export_access_key",
+            "title": "复制访问密钥",
+            "summary": "复制当前账号访问密钥，即access_key",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "export_cache_video",
+            "title": "导出缓存视频",
+            "summary": "将缓存的视频导出为mp4格式",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_unlock_area_limit": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "main_func",
+            "title": "总开关",
+            "summary": "设置解析服务器即可观看区域外版权番剧",
+            "children": []
+          }
+        ]
+      },
+      {
+        "kind": "PreferenceCategory",
+        "dependency": "main_func",
+        "children": [
+          {
+            "kind": "Preference",
+            "key": "custom_server",
+            "title": "设置解析服务器",
+            "summary": "使用设置的服务器解析区域限制番剧的播放地址；如不知如何设置，请查看帮助文档",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "allow_download",
+            "title": "允许下载版权番剧",
+            "summary": "使版权番剧可以缓存",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "allow_mini_play",
+            "title": "允许解锁番剧小窗播放",
+            "summary": "CC字幕并不能在小窗显示",
+            "children": []
+          },
+          {
+            "kind": "BLRadioGroupEntrancePreference",
+            "key": "upos_host",
+            "title": "UPOS 服务器",
+            "radioEntries": [
+              "不替换",
+              "ali（阿里）",
+              "alib（阿里）",
+              "alio1（阿里）",
+              "bos（百度）",
+              "cos（腾讯）",
+              "cosb（腾讯）",
+              "coso1（腾讯）",
+              "hw（华为）",
+              "hwb（华为）",
+              "hwo1（华为）",
+              "08c（华为）",
+              "08h（华为）",
+              "08ct（华为）",
+              "tf_hw（华为）",
+              "tf_tx（腾讯）",
+              "akamai（Akamai海外）",
+              "aliov（阿里海外）",
+              "cosov（腾讯海外）",
+              "hwov（华为海外）",
+              "hk_bcache（Bilibili海外）"
+            ],
+            "radioEntryValues": [
+              "$1",
+              "upos-sz-mirrorali.bilivideo.com",
+              "upos-sz-mirroralib.bilivideo.com",
+              "upos-sz-mirroralio1.bilivideo.com",
+              "upos-sz-mirrorbos.bilivideo.com",
+              "upos-sz-mirrorcos.bilivideo.com",
+              "upos-sz-mirrorcosb.bilivideo.com",
+              "upos-sz-mirrorcoso1.bilivideo.com",
+              "upos-sz-mirrorhw.bilivideo.com",
+              "upos-sz-mirrorhwb.bilivideo.com",
+              "upos-sz-mirrorhwo1.bilivideo.com",
+              "upos-sz-mirror08c.bilivideo.com",
+              "upos-sz-mirror08h.bilivideo.com",
+              "upos-sz-mirror08ct.bilivideo.com",
+              "upos-tf-all-hw.bilivideo.com",
+              "upos-tf-all-tx.bilivideo.com",
+              "upos-hz-mirrorakam.akamaized.net",
+              "upos-sz-mirroraliov.bilivideo.com",
+              "upos-sz-mirrorcosov.bilivideo.com",
+              "upos-sz-mirrorhwov.bilivideo.com",
+              "cn-hk-eq-bcache-01.bilivideo.com"
+            ],
+            "page": "biliroaming_setting_upos",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "test_upos",
+            "title": "UPOS 服务器测速",
+            "summary": "选择最快的 UPOS 服务器以获得最好体验",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "save_th_history",
+            "title": "本地保存泰区视频播放进度",
+            "summary": "泰区视频播放进度由于无法云端同步至账号，故提供此功能",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_upos": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "RadioGroupPreference",
+        "key": "upos_host",
+        "title": "自定义解锁番剧的 UPOS 服务器，可解决黑屏与无限加载",
+        "radioEntries": [
+          "不替换",
+          "ali（阿里）",
+          "alib（阿里）",
+          "alio1（阿里）",
+          "bos（百度）",
+          "cos（腾讯）",
+          "cosb（腾讯）",
+          "coso1（腾讯）",
+          "hw（华为）",
+          "hwb（华为）",
+          "hwo1（华为）",
+          "08c（华为）",
+          "08h（华为）",
+          "08ct（华为）",
+          "tf_hw（华为）",
+          "tf_tx（腾讯）",
+          "akamai（Akamai海外）",
+          "aliov（阿里海外）",
+          "cosov（腾讯海外）",
+          "hwov（华为海外）",
+          "hk_bcache（Bilibili海外）"
+        ],
+        "radioEntryValues": [
+          "$1",
+          "upos-sz-mirrorali.bilivideo.com",
+          "upos-sz-mirroralib.bilivideo.com",
+          "upos-sz-mirroralio1.bilivideo.com",
+          "upos-sz-mirrorbos.bilivideo.com",
+          "upos-sz-mirrorcos.bilivideo.com",
+          "upos-sz-mirrorcosb.bilivideo.com",
+          "upos-sz-mirrorcoso1.bilivideo.com",
+          "upos-sz-mirrorhw.bilivideo.com",
+          "upos-sz-mirrorhwb.bilivideo.com",
+          "upos-sz-mirrorhwo1.bilivideo.com",
+          "upos-sz-mirror08c.bilivideo.com",
+          "upos-sz-mirror08h.bilivideo.com",
+          "upos-sz-mirror08ct.bilivideo.com",
+          "upos-tf-all-hw.bilivideo.com",
+          "upos-tf-all-tx.bilivideo.com",
+          "upos-hz-mirrorakam.akamaized.net",
+          "upos-sz-mirroraliov.bilivideo.com",
+          "upos-sz-mirrorcosov.bilivideo.com",
+          "upos-sz-mirrorhwov.bilivideo.com",
+          "cn-hk-eq-bcache-01.bilivideo.com"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "biliroaming_setting_video_detail_filter": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "PreferenceCategory",
+        "children": [
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_video_relate_charge",
+            "title": "移除充电专属视频",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_video_relate_promote",
+            "title": "移除推广",
+            "summary": "游戏、课程、会员购、创作推广等",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_video_relate_only_av",
+            "title": "仅UP主投稿视频",
+            "summary": "上个选项的基础上，仅展示UP主投稿视频，移除番剧等内容",
+            "dependency": "remove_video_relate_promote",
+            "children": []
+          },
+          {
+            "kind": "SwitchPreferenceCompat",
+            "key": "remove_video_relate_nothing",
+            "title": "移除所有内容",
+            "summary": "上个选项的基础上，将UP主投稿视频也移除",
+            "dependency": "remove_video_relate_only_av",
+            "children": []
+          },
+          {
+            "kind": "Preference",
+            "key": "relate_keyword_filter",
+            "title": "按关键词过滤",
+            "summary": "复用首页推荐关键词过滤",
+            "page": "FilterHomeRcmdByKeywordFragment",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "biliroaming_setting_video_popups": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "CheckBoxGroupPreference",
+        "key": "remove_video_popups",
+        "entries": [
+          "投票弹幕",
+          "三连关注弹幕",
+          "评分弹幕",
+          "评分总结弹幕",
+          "关联视频弹幕",
+          "其它"
+        ],
+        "entryValues": [
+          "vote",
+          "attention",
+          "grade",
+          "gradeSummary",
+          "link",
+          "other"
+        ],
+        "radioEntrySummaries": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "云视听小电视、免流引导、投资UP主、跳转应用等"
+        ],
+        "children": []
+      }
+    ]
+  },
+  "CustomizeSubtitleStyleFragment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "custom_subtitle",
+        "title": "自定义字幕样式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_remove_bg",
+        "title": "移除字幕背景",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_bold",
+        "title": "字幕文字加粗",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_font_color2",
+        "title": "字幕文字颜色",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_font_size_portrait",
+        "title": "竖屏字幕字号",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_font_size_landscape",
+        "title": "横屏字幕字号",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_stroke_color",
+        "title": "字幕描边颜色",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_stroke_width",
+        "title": "字幕描边宽度",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "subtitle_offset",
+        "title": "字幕位置偏移",
+        "children": []
+      }
+    ]
+  },
+  "FilterCommentByKeywordFragment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "block_comment_up_level",
+        "title": "屏蔽用户等级过低的评论",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "block_comment_content_regex_mode",
+        "title": "评论内容使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "block_comment_up_regex_mode",
+        "title": "评论用户名使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "block_comment_content",
+        "title": "评论内容过滤词",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "block_comment_up",
+        "title": "评论过滤用户名",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "block_comment_uid",
+        "title": "评论过滤用户 ID",
+        "children": []
+      }
+    ]
+  },
+  "FilterDynamicByKeywordFragment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "dynamic_content_regex_mode",
+        "title": "动态内容使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "customize_dynamic_keyword_content",
+        "title": "动态内容过滤词",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "customize_dynamic_keyword_upname",
+        "title": "动态过滤 UP 主",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "customize_dynamic_keyword_uid",
+        "title": "动态过滤用户 ID",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "customize_dynamic_keyword_topic",
+        "title": "动态过滤话题",
+        "children": []
+      }
+    ]
+  },
+  "FilterHomeRcmdByKeywordFragment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "home_filter_apply_to_relate",
+        "title": "将首页过滤应用到相关推荐",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_apply_to_popular",
+        "title": "将首页过滤应用到热门",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_apply_to_story",
+        "title": "将首页过滤应用到竖屏视频",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "hide_low_play_count_recommend_limit",
+        "title": "最低播放量",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "hide_short_duration_recommend_limit",
+        "title": "推荐视频最短时长",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "hide_long_duration_recommend_limit",
+        "title": "推荐视频最长时长",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "hide_short_duration_story_limit",
+        "title": "竖屏视频最短时长",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "hide_long_duration_story_limit",
+        "title": "竖屏视频最长时长",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_title_regex_mode",
+        "title": "推荐标题使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_reason_regex_mode",
+        "title": "推荐理由使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_up_regex_mode",
+        "title": "推荐 UP 主使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_keywords_title",
+        "title": "推荐标题过滤词",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_keywords_reason",
+        "title": "推荐理由过滤词",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_keywords_uid",
+        "title": "推荐过滤用户 ID",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_keywords_up",
+        "title": "推荐过滤 UP 主",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_keywords_category",
+        "title": "推荐过滤分区",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "home_filter_keywords_channel",
+        "title": "推荐过滤频道",
+        "children": []
+      }
+    ]
+  },
+  "FilterSearchKeywordsFragment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "filter_search_content_regex",
+        "title": "搜索内容使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "filter_search_up_regex",
+        "title": "搜索 UP 主使用正则表达式",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "filter_search_content",
+        "title": "搜索内容过滤词",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "filter_search_up",
+        "title": "搜索过滤 UP 主",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "filter_search_uid",
+        "title": "搜索过滤用户 ID",
+        "children": []
+      }
+    ]
+  },
+  "TextFoldFragment": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "text_fold_comment_max_lines",
+        "title": "评论开始折叠行数",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "text_fold_dyn_max_lines",
+        "title": "动态开始折叠行数",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "text_fold_dyn_lines_to_all",
+        "title": "动态全文阅读触发行数",
+        "children": []
+      }
+    ]
+  },
+  "remaining_settings": {
+    "kind": "PreferenceScreen",
+    "children": [
+      {
+        "kind": "Preference",
+        "key": "show_hint",
+        "title": "显示提示",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "tw_server",
+        "title": "台湾解析服务器",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "hk_server",
+        "title": "香港解析服务器",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "cn_server",
+        "title": "大陆解析服务器",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "th_server",
+        "title": "泰国解析服务器",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "default_playback_speed",
+        "title": "默认播放速度",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "long_press_playback_speed",
+        "title": "长按播放速度",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "playback_speed_override",
+        "title": "自定义倍速列表",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "access_key_main",
+        "title": "主站账号访问密钥",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "access_key_th",
+        "title": "泰国账号访问密钥",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "external_downloader_name",
+        "title": "下载器包名",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "lossless_enabled",
+        "title": "无损音质记忆状态",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "bg_playing_enabled",
+        "title": "后台播放记忆状态",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "biliroaming_custom_color",
+        "title": "自定义主题颜色值",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "skin_json",
+        "title": "皮肤配置内容",
+        "children": []
+      },
+      {
+        "kind": "Preference",
+        "key": "selected_playback_speed",
+        "title": "已选播放速度",
+        "children": []
+      }
+    ]
+  }
+}

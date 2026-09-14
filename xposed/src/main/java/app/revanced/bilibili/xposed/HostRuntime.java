@@ -33,12 +33,19 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
         dialog.setTitle("哔哩漫游X");
         SettingsScreen screen = new SettingsScreen(activity, dialog.getContext(), settings, dialog::setContentView, dialog::dismiss);
         settingsDialog = dialog;
+        dialog.setOnKeyListener((ignored, key, event) -> key == android.view.KeyEvent.KEYCODE_BACK
+                && event.getAction() == android.view.KeyEvent.ACTION_UP && screen.back());
         dialog.setOnDismissListener(ignored -> {
             screen.pause();
             if (settingsDialog == dialog) settingsDialog = null;
         });
         try {
             dialog.show();
+            if (android.os.Build.VERSION.SDK_INT >= 33) {
+                dialog.getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                        android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+                        () -> { if (!screen.back()) dialog.dismiss(); });
+            }
             if (dialog.getWindow() != null) {
                 var window = dialog.getWindow();
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -84,6 +91,8 @@ final class HostRuntime implements Application.ActivityLifecycleCallbacks {
     void report(Bundle data, String identity) {
         settings.report(data, identity);
     }
+
+    void reportDrawer(java.util.List<String> ids, java.util.List<String> names) { settings.reportDrawer(ids, names); }
 
     void debug(String message) {
         if (preferences.getBoolean("debug", false)) entry.log(Log.DEBUG, ModuleConstants.TAG, message);

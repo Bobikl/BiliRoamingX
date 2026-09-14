@@ -2,9 +2,9 @@
 
 基准：tag 1.23.3，commit 0f2e66b56c20ddd2caeb92df2daddc354b3cca40；r2049 patches.json 共 **91** 项。
 
-首轮宿主按用户提供的 APK 改为粉版 tv.danmaku.bili 8.27.0（8270400）。首个可见功能为 Json Patch 中的底部导航过滤，其他 Json 子功能仍未移植。
+首轮宿主按用户提供的 APK 改为粉版 tv.danmaku.bili 8.27.0（8270400）。首个可见功能为底栏过滤；v4 继续移植同类 Json 子功能，范围见 [v4 报告](host-only-v4-report.md)，不代表整个 Json Patch 完成。
 
-当前 v3 按用户最新要求仅保留宿主内嵌设置；配置与底栏目录改为宿主本地保存，旧 Remote Preferences 仅供一次迁移。v2 的跨进程目录读取失败已记录并移除相关路径，见 [v3 报告](host-only-settings-report.md)。
+当前 v4 仅保留宿主内嵌设置，按原版目录展示全部功能，未移植控件显示“未移植”。配置与目录保存在宿主，旧 Remote Preferences 仅供一次迁移。用户已确认 v3 生效；v4 新功能仍待真机验证。
 
 这是逐项源码索引与初步分级，不把静态扫描当运行验证。A/B/C 是工作量预判；before/after/replace 取决于实际控制流，不能从出现 invoke 就断言可移植。所有非首轮项目保留为待分析，完整指纹和依赖见 patch-inventory.json。
 
@@ -33,7 +33,7 @@
 | Modify modifier | [ModifyModifierPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/ModifyModifierPatch.kt) | Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$Tab;<br>Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$TabData;<br>Ltv/danmaku/bili/ui/main2/resource/MainResourceManager\$TabResponse; | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Anti RecyclerView obfuscation | [NormalizeRecyclerViewPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/NormalizeRecyclerViewPatch.kt) | RecyclerViewHolderFingerprint | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | ProtoBuf print | [ProtoBufPrintPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/integrations/patch/ProtoBufPrintPatch.kt) | 见源码/依赖 Patch | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
-| Json | [JSONPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/json/patch/JSONPatch.kt) | JSONFingerprint | method | patches/json/JSONPatch;->parseArrayHook<br>patches/json/JSONPatch;->parseObjectHook | 底栏子功能不需要 before | 已实现：3 个 parseObject 返回后过滤；重载嵌套只处理最外层 | 否；原解析方法仍执行一次 | 底栏子功能无需修改宿主资源；共用内嵌/独立 UI | B / 已实现底栏子功能；其余 Json 功能未移植 | Release/4 项规则测试通过；2026-09-09 用户确认首版底栏隐藏真机生效；日志三次 3/3 安装成功 |
+| Json | [JSONPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/json/patch/JSONPatch.kt) | JSONFingerprint | method | patches/json/JSONPatch;->parseArrayHook<br>patches/json/JSONPatch;->parseObjectHook | 不需要 | 3 个 parseObject 返回后处理，嵌套只处理最外层；首页、我的、空间、开屏和直播等部分分支 | 部分广告/弹窗响应置空；不替换原解析方法 | 仅宿主内设置，原版目录数据，不注入宿主资源 | B / 部分移植，见 v4 报告；其他 Json 分支仍待移植 | v3 底栏用户确认；v4 构建和 26 项 JVM 检查通过，32 类/74 成员静态核对；新增真机待测 |
 | Pegasus hook | [PegasusPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/json/patch/PegasusPatch.kt) | Lcom/bilibili/app/comm/list/common/data/DislikeReason;<br>Lcom/bilibili/okretro/GeneralResponse;<br>Lcom/bilibili/pegasus/api/model/BasicIndexItem; | method | patches/json/PegasusPatch;->onFeedClick<br>patches/json/PegasusPatch;->pegasusHook | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | A / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Override certificate pinning | [OverrideCertificatePinningPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/network/OverrideCertificatePinningPatch.kt) | 见源码/依赖 Patch | resource/manifest | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 是 | C / 未移植 | 仅静态盘点；手机验证由用户执行 |
 | Music notification | [MusicNotificationPatch.kt](../patches/src/main/kotlin/app/revanced/patches/bilibili/misc/notification/patch/MusicNotificationPatch.kt) | HeadsetMediaSessionCallbackFingerprint<br>LiveNotificationHelperFingerprint<br>MediaSessionCallbackApi21Fingerprint<br>NotificationStyleAbFingerprint | method | 无直接调用（可能通过依赖） | 待按控制流人工确认 | 待按返回路径确认 | 需看注入位置；不等同整方法替换 | 未发现直接资源操作 | C / 未移植 | 仅静态盘点；手机验证由用户执行 |

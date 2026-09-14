@@ -57,7 +57,13 @@ for i, match in enumerate(matches):
                         'title': title, 'group': groups[-1] if groups else '基础设置',
                         'dependency': dependency[1] if dependency else None,
                         'needReboot': bool(re.search(r'needReboot\s*=\s*true', declaration)),
-                        'ported': key in ('showing_bottom_items', 'debug')})
+                        'ported': key in ('showing_bottom_items', 'debug', 'customize_home_tab', 'purify_game',
+                            'disable_main_page_story', 'showing_drawer_items', 'purify_drawer_reddot', 'block_tips',
+                            'customize_space', 'purify_splash', 'purify_live_popups', 'remove_live_mask',
+                            'remove_live_watermark', 'live_no_block', 'block_up_rcmd_ads', 'block_recommend_guidance')})
+    if key == 'purify_live_popups':
+        definitions[-1]['portedOptions'] = ['shoppingCard', 'gotoBuy', 'follow', 'reserve', 'wish', 'banner',
+                                           'plusOne', 'gift', 'task', 'playTogether', 'qoe']
 assert len({item['key'] for item in definitions}) == len(definitions)
 content = json.dumps(definitions, ensure_ascii=False, indent=2) + '\n'
 target = repo / 'xposed/src/main/assets/settings-schema.json'

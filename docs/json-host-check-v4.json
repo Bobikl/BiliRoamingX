@@ -1,0 +1,143 @@
+{
+  "host_sha256": "00ad96b15626026c9880f08c2ff3c5a8059c08eb1683928bb0e6ed2d0b37cd7c",
+  "checks": "passed",
+  "class_count": 32,
+  "member_count": 74,
+  "declarations": {
+    "tv.danmaku.bili.ui.main2.resource.MainResourceManager$TabResponse": [
+      ".field public tabData:Ltv/danmaku/bili/ui/main2/resource/MainResourceManager$TabData;"
+    ],
+    "tv.danmaku.bili.ui.main2.resource.MainResourceManager$TabData": [
+      ".field public bottom:Ljava/util/List;",
+      ".field public top:Ljava/util/List;",
+      ".field public tab:Ljava/util/List;",
+      ".field public topLeftInfo:Ltv/danmaku/bili/ui/main2/resource/MainResourceManager$TopLeftInfo;"
+    ],
+    "tv.danmaku.bili.ui.main2.resource.MainResourceManager$Tab": [
+      ".field public tabId:Ljava/lang/String;",
+      ".field public name:Ljava/lang/String;",
+      ".field public uri:Ljava/lang/String;"
+    ],
+    "tv.danmaku.bili.ui.main2.resource.MainResourceManager$TopLeftInfo": [
+      ".field public url:Ljava/lang/String;"
+    ],
+    "com.bilibili.okretro.GeneralResponse": [
+      ".field public data:Ljava/lang/Object;"
+    ],
+    "tv.danmaku.bili.ui.main2.api.AccountMine": [
+      ".field public sectionListV2:Ljava/util/List;",
+      ".field public liveTip:Ltv/danmaku/bili/ui/main2/api/AccountMine$LiveTip;",
+      ".field public gameTips:Ljava/util/List;"
+    ],
+    "com.bilibili.lib.homepage.mine.MenuGroup": [
+      ".field public title:Ljava/lang/String;",
+      ".field public itemList:Ljava/util/List;",
+      ".field public button:Lcom/bilibili/lib/homepage/mine/MenuGroup$MineButton;"
+    ],
+    "com.bilibili.lib.homepage.mine.MenuGroup$Item": [
+      ".field public id:J",
+      ".field public title:Ljava/lang/String;",
+      ".field public uri:Ljava/lang/String;",
+      ".field public redDot:I",
+      ".field public redDotRorNew:Z"
+    ],
+    "com.bilibili.lib.homepage.mine.MenuGroup$MineButton": [
+      ".field public text:Ljava/lang/String;"
+    ],
+    "com.bilibili.app.authorspace.api.BiliSpace": [
+      ".field public tab:Ljava/util/List;",
+      ".field public buttonEntranceList:Ljava/util/List;",
+      ".field public liveEntry:Lcom/bilibili/app/authorspace/api/BiliUserLiveEntry;",
+      ".field public chargeResult:Lcom/bilibili/comm/charge/api/ChargeRankResult;",
+      ".field public guard:Lcom/bilibili/app/authorspace/api/BiliSpaceGuard;",
+      ".field public ad:Lcom/bilibili/adcommon/basic/model/SourceContent;",
+      ".field public adV2:Lcom/bilibili/adcommon/basic/model/SourceContent;",
+      ".field public archiveVideo:Lcom/bilibili/app/authorspace/api/BiliSpaceArchiveVideo;",
+      ".field public article:Lcom/bilibili/app/authorspace/api/BiliSpaceArticleList;",
+      ".field public audio:Lcom/bilibili/app/authorspace/api/BiliSpaceAudioList;",
+      ".field public season:Lcom/bilibili/app/authorspace/api/BiliSpaceSeason;",
+      ".field public coinVideo:Lcom/bilibili/app/authorspace/api/BiliSpaceArchiveVideoNoCount;",
+      ".field public recommendVideo:Lcom/bilibili/app/authorspace/api/BiliSpaceArchiveVideoNoCount;",
+      ".field public followComicList:Lcom/bilibili/app/authorspace/api/BiliSpaceComicList;",
+      ".field public spaceGame:Lcom/bilibili/app/authorspace/api/BiliSpaceUserGame;",
+      ".field public cheeseVideo:Lcom/bilibili/app/authorspace/api/BiliSpaceArchiveVideo;",
+      ".field public fansDress:Lcom/bilibili/app/authorspace/api/BiliSpaceFansDress;",
+      ".field public favoriteBox:Lcom/bilibili/app/authorspace/api/BiliSpaceFavoriteBox;",
+      ".field public comicList:Lcom/bilibili/app/authorspace/api/BiliSpaceComicList;",
+      ".field public ugcSeasonList:Lcom/bilibili/app/authorspace/api/BiliSpaceUgcSeasonList;",
+      ".field public contractResource:Lcom/bilibili/app/authorspace/api/ContractResource;",
+      ".field public nftShowModule:Lcom/bilibili/app/authorspace/api/BiliSpaceNftShowModule;"
+    ],
+    "com.bilibili.app.authorspace.api.BiliSpace$Tab": [
+      ".field public param:Ljava/lang/String;"
+    ],
+    "com.bilibili.app.authorspace.api.BiliSpaceButtonEntrance": [
+      ".field public moduleType:Ljava/lang/String;"
+    ],
+    "tv.danmaku.bili.ui.splash.ad.model.SplashData": [
+      ".field private splashList:Ljava/util/List;",
+      ".field private strategyList:Ljava/util/List;"
+    ],
+    "tv.danmaku.bili.ui.splash.ad.model.SplashShowData": [
+      ".field private strategyList:Ljava/util/List;"
+    ],
+    "tv.danmaku.bili.ui.splash.brand.model.BrandSplashData": [
+      ".field private brandList:Ljava/util/List;",
+      ".field private preloadList:Ljava/util/List;",
+      ".field private queryList:Ljava/util/List;",
+      ".field private showList:Ljava/util/List;"
+    ],
+    "tv.danmaku.bili.ui.splash.event.EventSplashDataList": [
+      ".field private eventList:Ljava/util/List;"
+    ],
+    "tv.danmaku.bili.ui.splash.event.EventSplashData": [
+      ".method public final isBirthdayData()Z"
+    ],
+    "tv.danmaku.bili.ui.main.event.model.EventEntranceModel": [],
+    "com.bilibili.app.comm.list.widget.recommend.RecommendModeGuidanceConfig": [],
+    "com.bilibili.ad.adview.videodetail.danmakuv2.model.DmAdvert": [
+      ".field private ads:Ljava/util/List;"
+    ],
+    "com.bilibili.bililive.room.biz.shopping.beans.LiveShoppingInfo": [
+      ".field public shoppingCardDetail:Lcom/bilibili/bililive/room/biz/shopping/beans/LiveGoodsCardDetail;",
+      ".field public recommendCardDetail:Lcom/bilibili/bililive/room/biz/shopping/beans/LiveShoppingRecommendCardGoodsDetail;"
+    ],
+    "com.bilibili.bililive.room.biz.shopping.beans.LiveGoodsCardInfo": [],
+    "com.bilibili.bililive.room.biz.shopping.beans.LiveShoppingRecommendCardGoodsDetail": [],
+    "com.bilibili.bililive.room.biz.shopping.beans.LiveShoppingGotoBuyInfo": [],
+    "com.bilibili.bililive.videoliveplayer.net.beans.attentioncard.LiveRoomRecommendCard": [],
+    "com.bilibili.bililive.room.biz.reverse.bean.LiveRoomReserveInfo": [
+      ".field public showReserveDetail:Z"
+    ],
+    "com.bilibili.bililive.videoliveplayer.net.beans.gateway.roominfo.BiliLiveRoomInfo$DmComboInfo": [],
+    "com.bilibili.bililive.videoliveplayer.net.beans.gateway.roominfo.LiveRoomDanmakuVoteCardInfo": [],
+    "com.bilibili.bililive.videoliveplayer.net.beans.gateway.roominfo.BiliLiveRoomInfo": [
+      ".field public functionCard:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/BiliLiveRoomInfo$FunctionCard;",
+      ".field public bannerInfo:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/BiliLiveRoomBanner;",
+      ".field public dmComboInfo:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/BiliLiveRoomInfo$DmComboInfo;",
+      ".field public danmakuVoteCard:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/LiveRoomDanmakuVoteCardInfo;",
+      ".field public areaMaskInfo:Lcom/bilibili/bililive/videoliveplayer/net/beans/mask/LiveAreaMaskInfo;",
+      ".field public blockInfo:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/BiliLiveRoomInfo$BlockInfo;",
+      ".field public newSwitchInfo:Ljava/util/Map;"
+    ],
+    "com.bilibili.bililive.videoliveplayer.net.beans.gateway.roominfo.BiliLiveRoomInfo$FunctionCard": [
+      ".field public followCard:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/LiveRoomFollowCardInfo;",
+      ".field public wishlistCard:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/LiveRoomWishlistCardInfo;"
+    ],
+    "com.bilibili.bililive.videoliveplayer.net.beans.gateway.userinfo.BiliLiveRoomUserInfo": [
+      ".field public functionCard:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/userinfo/FunctionCard;",
+      ".field public taskInfo:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/userinfo/BiliLiveRoomUserTaskInfo;",
+      ".field public playTogetherInfo:Lcom/bilibili/bililive/videoliveplayer/net/beans/playtogether/LivePlayTogetherInfoUser;",
+      ".field public playTogetherInfoV2:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/roominfo/LiveRoomPlayTogetherCardInfo;",
+      ".field public qoe:Lcom/bilibili/bililive/videoliveplayer/net/beans/gateway/userinfo/LiveRoomUserResearch;"
+    ],
+    "com.bilibili.bililive.videoliveplayer.net.beans.gateway.userinfo.FunctionCard": [
+      ".field public sengGiftCard:Lcom/bilibili/bililive/videoliveplayer/net/beans/gift/LiveRoomSendGiftRemindCardInfo;"
+    ]
+  },
+  "excluded_live_options": [
+    "shoppingSelected",
+    "giftStar"
+  ],
+  "device_execution": false
+}

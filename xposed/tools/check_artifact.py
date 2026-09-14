@@ -61,6 +61,29 @@ schema = json.loads(contents['assets/settings-schema.json'].decode('utf-8'))
 assert len(schema) == len({item['key'] for item in schema}) == 204
 assert next(item for item in schema if item['key'] == 'showing_bottom_items')['default'] == ['_all']
 assert all(item['type'] in ('Boolean', 'Int', 'Long', 'Float', 'String', 'StringSet') for item in schema)
+page_count = None
+if 'assets/settings-pages.json' in contents:
+    pages = json.loads(contents['assets/settings-pages.json'].decode('utf-8'))
+    page_count = len(pages)
+    visited, visible_keys = set(), set()
+    def walk(row):
+        if 'key' in row:
+            visible_keys.add(row['key'])
+        if 'page' in row:
+            visit(row['page'])
+        for child in row.get('children', []):
+            walk(child)
+    def visit(page):
+        assert page in pages, page
+        if page in visited:
+            return
+        visited.add(page)
+        walk(pages[page])
+    visit('biliroaming_settings')
+    assert all(item['key'] in visible_keys for item in schema), 'Some settings are unreachable'
+    assert len([item for item in schema if item['ported']]) == 16
+    live = next(item for item in schema if item['key'] == 'purify_live_popups')
+    assert 'giftStar' not in live['portedOptions'] and 'shoppingSelected' not in live['portedOptions']
 host_components = None
 if args.host_only:
     assert args.sdk is not None, '--sdk is required for APK manifest verification'
@@ -84,6 +107,7 @@ report = {'apk': args.apk.name, 'bytes': args.apk.stat().st_size,
           'sha256': hashlib.sha256(args.apk.read_bytes()).hexdigest(),
           'checks': 'passed', 'entry': entry, 'api': 102, 'scope': 'tv.danmaku.bili',
           'defined_class_count': len(classes), 'settings_count': len(schema),
+          'settings_page_count': page_count,
           'forbidden_marker_hits': hits, 'device_testing': 'not performed; user handles phone validation'}
 if args.host_only:
     report['settings_mode'] = 'host-only; legacy framework preferences read only for one-time migration'

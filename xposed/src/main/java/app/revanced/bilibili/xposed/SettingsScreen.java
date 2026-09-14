@@ -1,357 +1,232 @@
 package app.revanced.bilibili.xposed;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.content.res.Configuration;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.content.res.ColorStateList;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import app.revanced.bilibili.runtime.BottomBarPolicy;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Collections;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/** Native settings screen displayed only inside the host-owned Dialog. */
+/** Original XML hierarchy rendered as Bilibili-style rows in the host window. */
 final class SettingsScreen {
-    private final SettingsStore module;
-    private JSONArray schema;
-    private LinearLayout content;
-    private LinearLayout settingsList;
-    private ScrollView scroll;
-    private boolean advanced;
-    private String search = "";
-    private Set<String> pendingBottom;
-    private boolean bottomDirty;
-    private String catalogIdentity = "";
-    private final Runnable observer = this::render;
-
+    private static final String ROOT = "biliroaming_settings";
     private final Activity activity;
     private final Context context;
-    private final java.util.function.Consumer<android.view.View> mount;
+    private final SettingsStore module;
+    private final Consumer<View> mount;
     private final Runnable close;
+    private final Runnable observer = this::render;
+    private final ArrayDeque<String[]> history = new ArrayDeque<>();
+    private final Map<String, JSONObject> definitions = new HashMap<>();
+    private String page = ROOT, title = "哔哩漫游X";
     private boolean active;
-    private AlertDialog editingDialog;
+    private LinearLayout content;
+    private ScrollView scroll;
+    private int foreground, muted, background, surface, divider;
+    private final int pink = 0xfffb7299;
 
-    SettingsScreen(Activity activity, Context context, SettingsStore module,
-                   java.util.function.Consumer<android.view.View> mount, Runnable close) {
-        this.activity = activity;
-        this.context = context;
-        this.module = module;
-        this.mount = mount;
-        this.close = close;
-    }
-
-    void resume() {
-        active = true;
-        module.observe(observer);
-        render();
-        module.refresh();
-    }
-
-    void pause() {
-        active = false;
-        module.stopObserving(observer);
-        if (editingDialog != null) { editingDialog.dismiss(); editingDialog = null; }
-    }
-
-    private int dp(int value) { return Math.round(value * activity.getResources().getDisplayMetrics().density); }
-
-    private TextView text(String value, int size) {
-        TextView view = new TextView(context);
-        view.setText(value);
-        view.setTextSize(size);
-        android.util.TypedValue color = new android.util.TypedValue();
-        if (context.getTheme().resolveAttribute(android.R.attr.textColorPrimary, color, true)) {
-            view.setTextColor(color.resourceId != 0 ? context.getColorStateList(color.resourceId)
-                    : android.content.res.ColorStateList.valueOf(color.data));
-        }
-        view.setPadding(0, dp(7), 0, dp(7));
-        content.addView(view);
-        return view;
-    }
-
-    private Button button(String label, Runnable action, boolean enabled) {
-        Button button = new Button(context);
-        button.setText(label);
-        button.setAllCaps(false);
-        button.setEnabled(enabled);
-        button.setOnClickListener(view -> action.run());
-        content.addView(button, new LinearLayout.LayoutParams(-1, -2));
-        return button;
-    }
-
-    private void render() {
-        try { renderContent(); }
-        catch (RuntimeException error) {
-            android.util.Log.e(ModuleConstants.TAG, "Module settings rendering failed", error);
-            toast("模块设置显示失败，请返回后重试。");
-        }
-    }
-
-    private void renderContent() {
-        if (!active || activity.isFinishing() || activity.isDestroyed()) return;
-        int oldScroll = scroll == null ? 0 : scroll.getScrollY();
-        scroll = new ScrollView(context);
-        content = new LinearLayout(context);
-        content.setOrientation(LinearLayout.VERTICAL);
-        content.setPadding(dp(20), dp(24), dp(20), dp(28));
-        // Let the window report status/navigation bars and display cutouts; no fixed heights.
-        scroll.setOnApplyWindowInsetsListener((view, insets) -> {
-            int left = insets.getSystemWindowInsetLeft();
-            int top = insets.getSystemWindowInsetTop();
-            int right = insets.getSystemWindowInsetRight();
-            int bottom = insets.getSystemWindowInsetBottom();
-            if (android.os.Build.VERSION.SDK_INT >= 28 && insets.getDisplayCutout() != null) {
-                var cutout = insets.getDisplayCutout();
-                left = Math.max(left, cutout.getSafeInsetLeft());
-                top = Math.max(top, cutout.getSafeInsetTop());
-                right = Math.max(right, cutout.getSafeInsetRight());
-                bottom = Math.max(bottom, cutout.getSafeInsetBottom());
-            }
-            view.setPadding(left, top, right, bottom);
-            return insets;
-        });
-        scroll.addView(content);
-        mount.accept(scroll);
-        scroll.requestApplyInsets();
-        schema = module.schema();
-        if (close != null) button("返回哔哩哔哩设置", close, true);
-        text("哔哩漫游X", 27).setTypeface(null, Typeface.BOLD);
-        text("LSPosed 模块 · 粉版 8.27.0", 15);
-        text(module.connectionStatus(), 15);
-        SharedPreferences preferences = module.preferences();
-        long revision = preferences == null ? 0 : preferences.getLong(ModuleConstants.REVISION, 0);
-        var catalog = module.catalog();
-        String state = catalog.getString("state", "");
-        long readRevision = catalog.getLong("revision", -1);
-        if ("applied".equals(state)) {
-            text("底栏最近读取：配置 " + readRevision + "，显示 " + catalog.getInt("after", 0)
-                    + " / " + catalog.getInt("before", 0) + " 个底栏按钮。", 15);
-            text("记录时间：" + DateFormat.getDateTimeInstance().format(new Date(catalog.getLong("received_at", 0))), 13);
-            if (revision != readRevision) text("新设置已保存，等待重启哔哩哔哩后读取。", 15);
-        } else if ("selection_mismatch".equals(state)) {
-            text("所选按钮与当前底栏不匹配，宿主已保留原样。请按下面的最新列表重新选择，或恢复显示全部。", 15);
-        } else if ("ready".equals(state)) {
-            text("宿主 Hook 已加载，等待首页底栏数据。", 15);
-        } else if ("partial".equals(state)) {
-            text("部分 Hook 安装失败，请查看 LSPosed 模块日志。", 15);
-        } else {
-            text("尚未读取到底栏数据。请先进入哔哩哔哩首页，再返回此页刷新。", 15);
-        }
-        text("需要展示的底栏", 21).setTypeface(null, Typeface.BOLD);
-        text("取消勾选即可隐藏。保存后彻底关闭并重新打开哔哩哔哩。首轮只实现底栏过滤；其他功能尚未移植。", 15);
-        renderBottom(preferences, catalog.getString("tabs", "[]"));
-        button("刷新状态", module::refresh, true);
-        button(advanced ? "收起全部设置" : "全部设置（" + schema.length() + " 项）", () -> {
-            advanced = !advanced;
-            render();
-        }, true);
-        if (advanced) {
-            text("未移植项目前只保存配置，不会在宿主生效，也不会执行原设置的附加操作。", 15);
-            EditText query = new EditText(context);
-            query.setSingleLine(true);
-            query.setHint("搜索设置名称或配置键");
-            query.setText(search);
-            content.addView(query);
-            settingsList = new LinearLayout(context);
-            settingsList.setOrientation(LinearLayout.VERTICAL);
-            content.addView(settingsList);
-            query.addTextChangedListener(new TextWatcher() {
-                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    search = s.toString();
-                    renderSettings();
-                }
-                @Override public void afterTextChanged(Editable s) {}
-            });
-            renderSettings();
-        }
-        text("基于 BiliRoamingX 1.23.3 · GPL-3.0\n底栏隐藏已通过用户真机验证；其他未移植项仅保存配置。", 12);
-        ScrollView rendered = scroll;
-        rendered.post(() -> rendered.scrollTo(0, oldScroll));
-    }
-
-    private void renderBottom(SharedPreferences preferences, String catalog) {
-        try {
-            JSONArray tabs = new JSONArray(catalog);
-            if (tabs.length() == 0) {
-                text("底栏列表会从你的哔哩哔哩自动读取，不使用预先猜测的按钮编号。", 15);
-            } else {
-                if (!catalog.equals(catalogIdentity)) bottomDirty = false;
-                catalogIdentity = catalog;
-                if (!bottomDirty || pendingBottom == null) {
-                    pendingBottom = new HashSet<>();
-                    Set<String> selected = preferences == null ? Collections.singleton(BottomBarPolicy.ALL)
-                            : preferences.getStringSet(ModuleConstants.BOTTOM_KEY, Collections.singleton(BottomBarPolicy.ALL));
-                    for (int i = 0; i < tabs.length(); i++) {
-                        String id = tabs.getJSONObject(i).getString("id");
-                        if (BottomBarPolicy.shouldShowing(selected, id)) pendingBottom.add(id);
-                    }
-                }
-                for (int i = 0; i < tabs.length(); i++) {
-                    JSONObject tab = tabs.getJSONObject(i);
-                    String id = tab.getString("id");
-                    CheckBox choice = new CheckBox(context);
-                    choice.setText(tab.getString("name"));
-                    choice.setTextSize(17);
-                    choice.setChecked(pendingBottom.contains(id));
-                    choice.setEnabled(preferences != null && !module.busy());
-                    choice.setOnCheckedChangeListener((view, checked) -> {
-                        bottomDirty = true;
-                        if (checked) pendingBottom.add(id);
-                        else pendingBottom.remove(id);
-                    });
-                    content.addView(choice);
-                }
-                button("保存底栏设置", () -> {
-                    if (pendingBottom.isEmpty()) { toast("请至少保留一个底栏按钮。"); return; }
-                    Set<String> selected = new HashSet<>(pendingBottom);
-                    save(editor -> editor.putStringSet(ModuleConstants.BOTTOM_KEY, selected));
-                }, preferences != null && !module.busy());
-            }
-            button("恢复显示全部底栏", () -> save(editor -> editor.remove(ModuleConstants.BOTTOM_KEY)), preferences != null && !module.busy());
-        } catch (JSONException error) {
-            android.util.Log.e(ModuleConstants.TAG, "Invalid cached catalog", error);
-            text("底栏列表读取失败，请重新启动哔哩哔哩后刷新。", 15);
-        }
-    }
-
-    private void save(Consumer<SharedPreferences.Editor> change) {
-        module.save(change, error -> {
-            if (!active || activity.isFinishing() || activity.isDestroyed()) return;
-            if (error == null) {
-                bottomDirty = false;
-                toast("已保存。请彻底关闭并重新打开哔哩哔哩。");
-            } else toast(error);
-        });
-    }
-
-    private void renderSettings() {
-        settingsList.removeAllViews();
-        String query = search.trim().toLowerCase(Locale.ROOT);
+    SettingsScreen(Activity activity, Context context, SettingsStore module, Consumer<View> mount, Runnable close) {
+        this.activity = activity; this.context = context; this.module = module; this.mount = mount; this.close = close;
+        JSONArray schema = module.schema();
         for (int i = 0; i < schema.length(); i++) {
-            JSONObject definition = schema.optJSONObject(i);
-            if (definition == null) continue;
-            String key = definition.optString("key");
-            String title = definition.optString("title");
-            String searchable = (title + " " + key + " " + definition.optString("symbol")).toLowerCase(Locale.ROOT);
-            if (!searchable.contains(query)) continue;
-            Button row = new Button(context);
-            row.setAllCaps(false);
-            row.setText(title + (definition.optBoolean("ported") ? "" : " · 仅保存"));
-            row.setEnabled(module.preferences() != null && !module.busy());
-            row.setOnClickListener(view -> {
-                if (ModuleConstants.BOTTOM_KEY.equals(key)) scroll.smoothScrollTo(0, 0);
-                else edit(definition);
-            });
-            settingsList.addView(row, new LinearLayout.LayoutParams(-1, -2));
+            JSONObject def = schema.optJSONObject(i);
+            if (def != null) definitions.put(def.optString("key"), def);
         }
     }
-
-    private Object value(JSONObject definition) throws JSONException {
-        SharedPreferences preferences = module.preferences();
-        if (preferences != null && preferences.contains(definition.getString("key"))) {
-            return preferences.getAll().get(definition.getString("key"));
-        }
-        return definition.get("default");
+    void resume() { active = true; module.observe(observer); render(); }
+    void pause() { active = false; module.stopObserving(observer); }
+    boolean back() {
+        if (history.isEmpty()) return false;
+        String[] previous = history.pop(); page = previous[0]; title = previous[1]; scroll = null; render(); return true;
     }
-
-    private String valueText(Object value) throws JSONException {
-        if (value instanceof JSONArray array) {
-            ArrayList<String> lines = new ArrayList<>();
-            for (int i = 0; i < array.length(); i++) lines.add(array.getString(i));
-            return android.text.TextUtils.join("\n", lines);
-        }
-        if (value instanceof Set<?> set) {
-            ArrayList<String> lines = new ArrayList<>();
-            for (Object entry : set) lines.add(String.valueOf(entry));
-            Collections.sort(lines);
-            return android.text.TextUtils.join("\n", lines);
-        }
-        return String.valueOf(value);
+    private void open(String target, String label) {
+        history.push(new String[]{page, title}); page = target; title = label; scroll = null; render();
     }
-
-    private void edit(JSONObject definition) {
+    private int dp(int value) { return Math.round(value * context.getResources().getDisplayMetrics().density); }
+    private TextView label(String text, int size, int color) {
+        TextView view = new TextView(context); view.setText(text); view.setTextSize(size); view.setTextColor(color); return view;
+    }
+    private void render() {
+        if (!active || activity.isFinishing() || activity.isDestroyed()) return;
         try {
-            String key = definition.getString("key");
-            String type = definition.getString("type");
-            String hint = definition.optBoolean("ported") ? "" : "尚未移植：此处只保存配置。\n";
-            hint += "配置键：" + key;
-            if (!definition.isNull("dependency")) hint += "\n依赖设置：" + definition.getString("dependency");
-            AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(definition.getString("title"))
-                    .setMessage(hint).setNeutralButton("恢复默认", (dialog, which) -> save(editor -> editor.remove(key)))
-                    .setNegativeButton("取消", null);
-            if ("Boolean".equals(type)) {
-                CheckBox toggle = new CheckBox(context);
-                toggle.setText("开启");
-                toggle.setPadding(dp(24), dp(12), dp(24), dp(12));
-                toggle.setChecked(Boolean.TRUE.equals(value(definition)));
-                editingDialog = builder.setView(toggle).setPositiveButton("保存", (dialog, which) -> {
-                    boolean checked = toggle.isChecked();
-                    save(editor -> editor.putBoolean(key, checked));
-                }).show();
-                return;
-            }
-            EditText input = new EditText(context);
-            input.setText(valueText(value(definition)));
-            input.setPadding(dp(24), dp(12), dp(24), dp(12));
-            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-            if (key.startsWith("access_key")) input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            if ("StringSet".equals(type)) input.setHint("每行一个值；留空表示空集合");
-            AlertDialog dialog = builder.setView(input).setPositiveButton("保存", null).create();
-            editingDialog = dialog;
-            dialog.setOnShowListener(ignored -> dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
-                try {
-                    String text = input.getText().toString();
-                    Consumer<SharedPreferences.Editor> change;
-                    switch (type) {
-                        case "Int" -> { int number = Integer.parseInt(text.trim()); change = editor -> editor.putInt(key, number); }
-                        case "Long" -> { long number = Long.parseLong(text.trim()); change = editor -> editor.putLong(key, number); }
-                        case "Float" -> {
-                            float number = Float.parseFloat(text.trim());
-                            if (!Float.isFinite(number)) throw new IllegalArgumentException("Non-finite number");
-                            change = editor -> editor.putFloat(key, number);
-                        }
-                        case "StringSet" -> {
-                            Set<String> values = new HashSet<>();
-                            for (String line : text.split("\n", -1)) if (!line.isEmpty()) values.add(line);
-                            change = editor -> editor.putStringSet(key, values);
-                        }
-                        case "String" -> change = editor -> editor.putString(key, text);
-                        default -> throw new IllegalArgumentException("Unsupported setting type");
-                    }
-                    save(change);
-                    dialog.dismiss();
-                } catch (IllegalArgumentException error) {
-                    input.setError("请输入有效的" + ("Float".equals(type) ? "数字" : "整数或配置值"));
+            boolean dark = (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+            foreground = dark ? 0xffe3e5e7 : 0xff18191c; muted = dark ? 0xff9499a0 : 0xff9499a0;
+            surface = dark ? 0xff17181a : 0xffffffff; background = dark ? 0xff101113 : 0xfff6f7f8;
+            divider = dark ? 0xff242628 : 0xfff1f2f3;
+            int position = scroll == null ? 0 : scroll.getScrollY();
+            LinearLayout root = new LinearLayout(context); root.setOrientation(LinearLayout.VERTICAL); root.setBackgroundColor(background);
+            root.setOnApplyWindowInsetsListener((view, insets) -> {
+                int left = insets.getSystemWindowInsetLeft(), top = insets.getSystemWindowInsetTop();
+                int right = insets.getSystemWindowInsetRight(), bottom = insets.getSystemWindowInsetBottom();
+                if (android.os.Build.VERSION.SDK_INT >= 28 && insets.getDisplayCutout() != null) {
+                    var cutout = insets.getDisplayCutout(); left = Math.max(left, cutout.getSafeInsetLeft());
+                    top = Math.max(top, cutout.getSafeInsetTop()); right = Math.max(right, cutout.getSafeInsetRight());
+                    bottom = Math.max(bottom, cutout.getSafeInsetBottom());
                 }
-            }));
-            dialog.show();
-        } catch (JSONException error) {
-            android.util.Log.e(ModuleConstants.TAG, "Invalid setting definition", error);
-            toast("该设置格式错误。");
+                view.setPadding(left, top, right, bottom); return insets;
+            });
+            LinearLayout toolbar = new LinearLayout(context); toolbar.setGravity(Gravity.CENTER_VERTICAL); toolbar.setBackgroundColor(surface);
+            TextView arrow = label("‹", 34, foreground); arrow.setGravity(Gravity.CENTER); arrow.setContentDescription("返回");
+            toolbar.addView(arrow, new LinearLayout.LayoutParams(dp(52), dp(56)));
+            arrow.setOnClickListener(v -> { if (!back()) close.run(); });
+            TextView heading = label(title, 18, foreground); heading.setSingleLine(true); heading.setEllipsize(android.text.TextUtils.TruncateAt.END);
+            toolbar.addView(heading, new LinearLayout.LayoutParams(0, -2, 1));
+            root.addView(toolbar); scroll = new ScrollView(context); scroll.setFillViewport(true);
+            content = new LinearLayout(context); content.setOrientation(LinearLayout.VERTICAL); content.setPadding(0, dp(8), 0, dp(24));
+            scroll.addView(content); root.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
+            JSONObject model = module.pages().optJSONObject(page);
+            if (model != null) children(model.optJSONArray("children"));
+            else note("设置目录读取失败，请重新打开哔哩哔哩。");
+            if (ROOT.equals(page)) note("未移植功能暂不可修改。设置保存后，请彻底关闭并重新打开哔哩哔哩。");
+            mount.accept(root); root.requestApplyInsets();
+            ScrollView rendered = scroll; rendered.post(() -> rendered.scrollTo(0, position));
+        } catch (RuntimeException error) {
+            android.util.Log.e(ModuleConstants.TAG, "Settings.render", error); toast("设置页加载失败，请返回重试。");
         }
     }
-
-    private void toast(String message) { Toast.makeText(activity, message, Toast.LENGTH_LONG).show(); }
+    private void children(JSONArray rows) {
+        if (rows == null) return;
+        for (int i = 0; i < rows.length(); i++) {
+            JSONObject row = rows.optJSONObject(i); if (row == null) continue;
+            String kind = row.optString("kind"), key = row.optString("key");
+            String label = row.optString("title", definitions.containsKey(key) ? definitions.get(key).optString("title") : "");
+            if ("version".equals(key)) {
+                addRow(label, BuildConfig.VERSION_NAME + "\n" + module.connectionStatus(), "", null, null); continue;
+            }
+            if (kind.contains("Category")) { section(label); children(row.optJSONArray("children")); continue; }
+            if (row.has("page")) {
+                String target = row.optString("page");
+                addRow(label, row.optString("summary"), "›", () -> open(target, label), null); continue;
+            }
+            JSONObject definition = definitions.get(key);
+            if (kind.contains("CheckBoxGroup") || kind.contains("RadioGroup")) {
+                options(row, definition, label); continue;
+            }
+            if (definition != null && definition.optBoolean("ported") && "Boolean".equals(definition.optString("type"))) {
+                boolean checked = module.preferences().getBoolean(key, definition.optBoolean("default"));
+                addRow(label, row.optString("summary"), "", () -> save(e -> e.putBoolean(key, !checked)), checked);
+            } else if (definition != null && definition.optBoolean("ported") && row.has("entries")) {
+                options(row, definition, label);
+            } else {
+                addRow(label.isEmpty() ? (key.isEmpty() ? "设置" : key) : label, row.optString("summary"), "未移植", null, null);
+            }
+        }
+    }
+    private void options(JSONObject row, JSONObject def, String name) {
+        String key = row.optString("key");
+        boolean ported = def != null && def.optBoolean("ported");
+        JSONArray entries = row.optJSONArray("entries"), values = row.optJSONArray("entryValues");
+        if (entries == null) entries = row.optJSONArray("radioEntries");
+        if (values == null) values = row.optJSONArray("radioEntryValues");
+        boolean dynamic = "showing_bottom_items".equals(key) || "showing_drawer_items".equals(key);
+        if (dynamic) {
+            entries = new JSONArray(); values = new JSONArray();
+            try {
+                JSONArray tabs = new JSONArray(module.catalog().getString("showing_bottom_items".equals(key) ? "tabs" : "drawer_tabs", "[]"));
+                for (int i = 0; i < tabs.length(); i++) { JSONObject tab = tabs.getJSONObject(i); entries.put(tab.getString("name")); values.put(tab.getString("id")); }
+            } catch (org.json.JSONException error) { toast("选项列表读取失败。"); }
+            note("勾选需要显示的项目，修改后自动保存。" + ("showing_drawer_items".equals(key) ? "设置入口始终保留。" : "至少保留一个底栏按钮。"));
+            addRow("恢复显示全部", "", "", () -> save(e -> e.remove(key)), null);
+            if (entries.length() == 0) { note("请先打开首页和“我的”，收到页面数据后再进入此页。"); return; }
+        } else if (!name.isEmpty()) section(name);
+        if (entries == null || values == null) { addRow(name, "", "未移植", null, null); return; }
+        Set<String> selected = new HashSet<>();
+        boolean set = def != null && "StringSet".equals(def.optString("type"));
+        if (set) {
+            Set<String> defaults = new HashSet<>(); JSONArray array = def.optJSONArray("default");
+            if (array != null) for (int i = 0; i < array.length(); i++) defaults.add(array.optString(i));
+            selected.addAll(module.preferences().getStringSet(key, defaults));
+            if (dynamic && selected.size() == 1 && selected.contains("_all")) {
+                selected.clear(); for (int i = 0; i < values.length(); i++) selected.add(values.optString(i));
+            }
+        }
+        for (int i = 0; i < Math.min(entries.length(), values.length()); i++) {
+            String value = values.optString(i), text = entries.optString(i);
+            boolean available = ported && (def.optJSONArray("portedOptions") == null || contains(def.optJSONArray("portedOptions"), value));
+            boolean checked = set ? selected.contains(value) : def != null && value.equals(module.preferences().getString(key, def.optString("default")));
+            JSONArray summaries = row.optJSONArray("radioEntrySummaries");
+            addRow(text, summaries == null ? "" : summaries.optString(i), available ? "" : "未移植", available ? () -> {
+                if (set) {
+                    Set<String> update = new HashSet<>(selected); if (checked) update.remove(value); else update.add(value);
+                    if ("showing_bottom_items".equals(key) && update.isEmpty()) { toast("请至少保留一个底栏按钮。"); return; }
+                    save(e -> e.putStringSet(key, update));
+                } else save(e -> e.putString(key, value));
+            } : null, available ? checked : null, true);
+        }
+    }
+    private static boolean contains(JSONArray values, String value) {
+        for (int i = 0; i < values.length(); i++) if (value.equals(values.optString(i))) return true; return false;
+    }
+    private void section(String title) {
+        TextView view = label(title, 13, muted); view.setPadding(dp(16), dp(16), dp(16), dp(9));
+        if (title.isEmpty()) view.setPadding(0, dp(5), 0, dp(5)); content.addView(view);
+    }
+    private void note(String text) {
+        TextView view = label(text, 13, muted); view.setPadding(dp(16), dp(14), dp(16), dp(14)); content.addView(view);
+    }
+    private void addRow(String title, String summary, String status, Runnable action, Boolean checked) {
+        addRow(title, summary, status, action, checked, false);
+    }
+    private void addRow(String title, String summary, String status, Runnable action, Boolean checked, boolean choice) {
+        LinearLayout row = new LinearLayout(context); row.setGravity(Gravity.CENTER_VERTICAL); row.setMinimumHeight(dp(54));
+        row.setPadding(dp(16), dp(13), dp(16), dp(13)); row.setBackgroundColor(surface);
+        LinearLayout texts = new LinearLayout(context); texts.setOrientation(LinearLayout.VERTICAL);
+        texts.addView(label(title, 16, foreground));
+        if (!summary.isEmpty()) { TextView sub = label(summary, 12, muted); sub.setPadding(0, dp(5), 0, 0); texts.addView(sub); }
+        row.addView(texts, new LinearLayout.LayoutParams(0, -2, 1));
+        if (checked != null) {
+            Toggle toggle = new Toggle(checked, choice); LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dp(choice ? 24 : 40), dp(24)); lp.leftMargin = dp(16); row.addView(toggle, lp);
+            row.setContentDescription(title + (checked ? "，已开启" : "，已关闭"));
+        } else if (!status.isEmpty()) {
+            TextView end = label(status, "›".equals(status) ? 26 : 13, muted); end.setPadding(dp(16), 0, 0, 0); row.addView(end);
+        }
+        if (action != null) {
+            row.setBackground(new RippleDrawable(ColorStateList.valueOf(0x18777777), new ColorDrawable(surface), null));
+            row.setEnabled(!module.busy()); row.setOnClickListener(v -> action.run());
+        }
+        content.addView(row); View line = new View(context); line.setBackgroundColor(divider);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, dp(1)); lp.leftMargin = dp(16); content.addView(line, lp);
+    }
+    private void save(Consumer<SharedPreferences.Editor> change) {
+        module.save(change, error -> { if (active) toast(error == null ? "已保存，重启哔哩哔哩后生效。" : error); });
+    }
+    private void toast(String text) { Toast.makeText(activity, text, Toast.LENGTH_SHORT).show(); }
+    private final class Toggle extends View {
+        private final boolean checked, choice; private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        Toggle(boolean checked, boolean choice) { super(context); this.checked = checked; this.choice = choice; setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO); }
+        @Override protected void onDraw(Canvas canvas) {
+            float h = getHeight(), w = getWidth(); paint.setColor(checked ? pink : 0xffc9ccd0);
+            if (choice) {
+                paint.setStyle(checked ? Paint.Style.FILL : Paint.Style.STROKE); paint.setStrokeWidth(dp(2));
+                canvas.drawCircle(w / 2, h / 2, h / 2 - dp(2), paint);
+                if (checked) {
+                    paint.setColor(0xffffffff); paint.setStyle(Paint.Style.STROKE); paint.setStrokeWidth(dp(2));
+                    Path path = new Path(); path.moveTo(w * .27f, h * .5f); path.lineTo(w * .44f, h * .66f); path.lineTo(w * .75f, h * .34f); canvas.drawPath(path, paint);
+                }
+                paint.setStyle(Paint.Style.FILL); return;
+            }
+            canvas.drawRoundRect(new RectF(0, 0, w, h), h / 2, h / 2, paint);
+            paint.setColor(0xffffffff); canvas.drawCircle(checked ? w - h / 2 : h / 2, h / 2, h / 2 - dp(2), paint);
+        }
+    }
 }

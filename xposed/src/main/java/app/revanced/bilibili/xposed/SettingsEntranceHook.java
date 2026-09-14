@@ -66,7 +66,7 @@ final class SettingsEntranceHook {
         Object row = rowConstructor.newInstance(context);
         setKey.invoke(row, KEY);
         setTitle.invoke(row, "哔哩漫游X");
-        setSummary.invoke(row, "底栏隐藏与模块设置");
+        setSummary.invoke(row, "哔哩漫游X 设置");
         setOrder.invoke(row, -1000);
         setPersistent.invoke(row, false);
         setIconSpace.invoke(row, false);

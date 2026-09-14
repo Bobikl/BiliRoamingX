@@ -32,6 +32,7 @@ final class LocalSettingsStore implements SettingsStore {
     private final Set<Runnable> observers = new CopyOnWriteArraySet<>();
     private final Map<String, String> types = new HashMap<>();
     private JSONArray schema = new JSONArray();
+    private JSONObject pages = new JSONObject();
     private volatile String migrationStatus = "";
     private volatile String lastReport = "";
     private boolean saving;
@@ -56,6 +57,15 @@ final class LocalSettingsStore implements SettingsStore {
                 types.put(item.getString("key"), item.getString("type"));
             }
             if (types.size() != 204) throw new IllegalStateException("Unexpected settings schema size");
+            var pageAsset = apk.getEntry("assets/settings-pages.json");
+            if (pageAsset == null) throw new IllegalStateException("Settings pages absent");
+            try (var stream = apk.getInputStream(pageAsset)) {
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                byte[] buffer = new byte[8192];
+                int count;
+                while ((count = stream.read(buffer)) != -1) bytes.write(buffer, 0, count);
+                pages = new JSONObject(new String(bytes.toByteArray(), StandardCharsets.UTF_8));
+            }
         } catch (Exception error) {
             entry.failure("Settings.schema", "module APK asset", "read schema", error);
             schema = new JSONArray();
@@ -89,6 +99,7 @@ final class LocalSettingsStore implements SettingsStore {
     @Override public SharedPreferences preferences() { return preferences; }
     @Override public SharedPreferences catalog() { return catalog; }
     @Override public JSONArray schema() { return schema; }
+    @Override public JSONObject pages() { return pages; }
     @Override public String connectionStatus() { return "设置保存在哔哩哔哩内，可直接修改。" + migrationStatus; }
     @Override public boolean busy() { return saving; }
     @Override public void observe(Runnable callback) { observers.add(callback); }
@@ -151,5 +162,20 @@ final class LocalSettingsStore implements SettingsStore {
                 entry.failure("BottomBar.catalog", "host SharedPreferences", "save metadata", error);
             }
         });
+    }
+
+    void reportDrawer(java.util.List<String> ids, java.util.List<String> names) {
+        if (ids.size() != names.size()) return;
+        try {
+            JSONArray rows = new JSONArray();
+            for (int i = 0; i < ids.size(); i++) rows.put(new JSONObject().put("id", ids.get(i)).put("name", names.get(i)));
+            String text = rows.toString();
+            if (text.equals(catalog.getString("drawer_tabs", ""))) return;
+            writer.execute(() -> {
+                if (text.equals(catalog.getString("drawer_tabs", ""))) return;
+                if (catalog.edit().putString("drawer_tabs", text).commit()) notifyState();
+                else entry.failure("Json.Mine.catalog", "host SharedPreferences", "commit", new IllegalStateException("Catalog save failed"));
+            });
+        } catch (org.json.JSONException error) { entry.failure("Json.Mine.catalog", "JSON", "encode", error); }
     }
 }

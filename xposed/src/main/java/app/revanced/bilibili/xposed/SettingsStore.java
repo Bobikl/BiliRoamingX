@@ -2,6 +2,7 @@ package app.revanced.bilibili.xposed;
 
 import android.content.SharedPreferences;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import java.util.function.Consumer;
 
 /** Host-only settings and diagnostics; there is no independent module UI. */
@@ -9,6 +10,7 @@ interface SettingsStore {
     SharedPreferences preferences();
     SharedPreferences catalog();
     JSONArray schema();
+    JSONObject pages();
     String connectionStatus();
     default boolean busy() { return false; }
     void observe(Runnable observer);

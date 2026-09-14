@@ -31,10 +31,12 @@ final class BottomBarHook {
     private Field bottom;
     private Field id;
     private Field name;
+    private final JsonFeatureFilter featureFilter;
 
     BottomBarHook(ModuleEntry entry, HostRuntime runtime) {
         this.entry = entry;
         this.runtime = runtime;
+        featureFilter = new JsonFeatureFilter(runtime::reportDrawer);
     }
 
     private Class<?> hostClass(String name) throws ClassNotFoundException {
@@ -92,6 +94,11 @@ final class BottomBarHook {
                                 filter(result);
                             } catch (Throwable error) {
                                 entry.failure("Json.BottomBar", JSON, method.toGenericString(), error);
+                            }
+                            try {
+                                result = featureFilter.filter(result, runtime.preferences.getAll());
+                            } catch (Throwable error) {
+                                entry.failure("Json.Features", result == null ? "null" : result.getClass().getName(), method.toGenericString(), error);
                             }
                         }
                         return result;

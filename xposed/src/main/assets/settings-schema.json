@@ -351,7 +351,7 @@
     "group": "首页",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "FilterHomeRecommend",
@@ -604,7 +604,7 @@
     "group": "首页",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "Drawer",
@@ -626,7 +626,7 @@
     "group": "首页",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "BlockTopActivity",
@@ -648,7 +648,7 @@
     "group": "首页",
     "dependency": null,
     "needReboot": true,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "BlockPopularTopEntrance",
@@ -956,7 +956,7 @@
     "group": "我的页",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "RemoveVipSection",
@@ -980,7 +980,7 @@
     "group": "我的页",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "SwitchDarkTipsDialog",
@@ -1024,7 +1024,7 @@
     "group": "我的页",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "ForbidSwitchLiveRoom",
@@ -1057,7 +1057,20 @@
     "group": "直播间",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true,
+    "portedOptions": [
+      "shoppingCard",
+      "gotoBuy",
+      "follow",
+      "reserve",
+      "wish",
+      "banner",
+      "plusOne",
+      "gift",
+      "task",
+      "playTogether",
+      "qoe"
+    ]
   },
   {
     "symbol": "RemoveLiveMask",
@@ -1068,7 +1081,7 @@
     "group": "直播间",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DefaultMaxQn",
@@ -1112,7 +1125,7 @@
     "group": "直播间",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "LiveNoBlock",
@@ -1123,7 +1136,7 @@
     "group": "直播间",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "AutoLike",
@@ -1233,7 +1246,7 @@
     "group": "视频详情页",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "BlockBangumiPageAds",
@@ -1618,7 +1631,7 @@
     "group": "用户空间页",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "AddArticleTab",
@@ -2168,7 +2181,7 @@
     "group": "杂项",
     "dependency": null,
     "needReboot": false,
-    "ported": false
+    "ported": true
   },
   {
     "symbol": "DisallowCollectPrivacyInfo",
